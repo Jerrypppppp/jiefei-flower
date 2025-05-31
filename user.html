@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>捷菲花藝 - 用戶登入</title>
+    <title>用戶登入 - 捷菲花藝</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -22,71 +19,54 @@
         }
     </script>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full mx-4">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-secondary mb-2">歡迎回來</h1>
-            <p class="text-gray-600">請選擇登入方式</p>
-        </div>
-
-        <div class="space-y-4">
-            <button id="googleLogin" class="w-full bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 flex items-center justify-center">
-                <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5 mr-2">
-                使用 Google 帳號登入
-            </button>
-
-            <div class="relative my-6">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
+<body class="font-sans bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h1 class="text-2xl font-bold text-center mb-6">用戶登入</h1>
+            <div class="space-y-4">
+                <button class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center">
+                    <i class="fab fa-google mr-2"></i>
+                    使用 Google 帳號登入
+                </button>
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">或</span>
+                    </div>
                 </div>
-                <div class="relative flex justify-center text-sm">
-                    <span class="px-2 bg-white text-gray-500">或</span>
-                </div>
+                <form id="userLoginForm" class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">電子郵件</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">密碼</label>
+                        <input type="password" id="password" name="password" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        登入
+                    </button>
+                </form>
             </div>
-
-            <a href="index.html" class="block w-full text-center text-gray-600 hover:text-primary">
-                返回首頁
-            </a>
+            <div class="mt-4 text-center">
+                <a href="index.html" class="text-primary hover:text-primary/90">返回首頁</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // Firebase 配置
-        const firebaseConfig = {
-            // 這裡需要填入您的 Firebase 配置
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // 初始化 Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-        // 登入表單提交
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        document.getElementById('userLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            try {
-                await auth.signInWithEmailAndPassword(email, password);
-                // 登入成功後跳轉到首頁
-                window.location.href = 'index.html';
-            } catch (error) {
-                alert('登入失敗：' + error.message);
-            }
-        });
-
-        // Google 登入按鈕點擊事件
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            // 這裡可以添加 Google 登入的實現
-            // 目前先模擬登入成功
-            alert('Google 登入功能即將推出！');
-            window.location.href = 'index.html';
+            // 這裡應該要連接到後端進行驗證
+            alert('登入功能開發中...');
         });
     </script>
 </body>

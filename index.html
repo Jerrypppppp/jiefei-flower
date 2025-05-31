@@ -6,11 +6,6 @@
     <title>捷菲花藝 - 專業花藝設計</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -164,20 +159,36 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Firebase 配置
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
             authDomain: "jiefei-flower.firebaseapp.com",
             projectId: "jiefei-flower",
-            storageBucket: "jiefei-flower.appspot.com",
-            messagingSenderId: "XXXXXXXXXXXX",
-            appId: "1:XXXXXXXXXXXX:web:XXXXXXXXXXXXXXXX"
+            storageBucket: "jiefei-flower.firebasestorage.app",
+            messagingSenderId: "761028186679",
+            appId: "1:761028186679:web:19b10716623861fc48a5b2",
+            measurementId: "G-G6FXQPJPPV"
         };
 
-        // 初始化 Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        // 檢查是否在 GitHub Pages 環境中運行
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        if (isGitHubPages) {
+            // 在 GitHub Pages 環境中，使用 HTTPS
+            firebaseConfig.authDomain = 'jiefei-flower.firebaseapp.com';
+        }
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
 
         // 登入 Modal 控制
         const loginModal = document.getElementById('loginModal');
@@ -199,8 +210,8 @@
 
         // Google 登入
         googleLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
                 .then((result) => {
                     // 登入成功
                     hideLoginModal();
@@ -215,7 +226,7 @@
 
         // 登出功能
         function handleLogout() {
-            auth.signOut()
+            signOut(auth)
                 .then(() => {
                     // 更新按鈕文字
                     loginBtn.textContent = '登入';
@@ -227,7 +238,7 @@
         }
 
         // 監聽登入狀態
-        auth.onAuthStateChanged((user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
                 // 已登入
                 loginBtn.textContent = '登出';
