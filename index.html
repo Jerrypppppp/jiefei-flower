@@ -24,46 +24,56 @@
         }
     </script>
 </head>
-<body class="font-sans">
+<body class="font-sans bg-gray-50">
     <!-- 導航欄 -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50 transition-all duration-300">
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-secondary">捷菲花藝</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-secondary hover:text-primary transition-colors">首頁</a>
-                    <a href="#services" class="text-secondary hover:text-primary transition-colors">服務項目</a>
-                    <a href="#gallery" class="text-secondary hover:text-primary transition-colors">作品集</a>
-                    <a href="#about" class="text-secondary hover:text-primary transition-colors">關於我們</a>
-                    <a href="#contact" class="text-secondary hover:text-primary transition-colors">聯絡資訊</a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button id="loginBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">
+                <a href="#" class="text-2xl font-bold text-secondary">捷菲花藝</a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#about" class="text-gray-600 hover:text-primary">關於我們</a>
+                    <a href="#services" class="text-gray-600 hover:text-primary">服務項目</a>
+                    <a href="#gallery" class="text-gray-600 hover:text-primary">作品集</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary">聯絡我們</a>
+                    <button id="loginBtn" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">
                         登入
                     </button>
-                    <button class="md:hidden text-secondary">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
                 </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <!-- 手機版選單 -->
+            <div id="mobileMenu" class="md:hidden hidden mt-4">
+                <a href="#about" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+                <a href="#services" class="block py-2 text-gray-600 hover:text-primary">服務項目</a>
+                <a href="#gallery" class="block py-2 text-gray-600 hover:text-primary">作品集</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-primary">聯絡我們</a>
+                <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">
+                    登入
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- 登入彈窗 -->
-    <div id="loginModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-8 w-96">
+    <!-- 登入選項 Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">登入</h2>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                <h2 class="text-2xl font-bold">登入選項</h2>
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="space-y-4">
-                <button onclick="window.location.href='admin.html'" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600">
-                    管理者登入
-                </button>
-                <button onclick="window.location.href='user.html'" class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600">
-                    一般用戶登入
+                <a href="user.html" class="block w-full bg-blue-500 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-600">
+                    <i class="fab fa-google mr-2"></i>使用 Google 帳號登入
+                </a>
+                <a href="admin.html" class="block w-full bg-gray-500 text-white text-center px-6 py-3 rounded-lg hover:bg-gray-600">
+                    <i class="fas fa-user-shield mr-2"></i>管理員登入
+                </a>
+                <button id="browseWithoutLogin" class="block w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90">
+                    直接瀏覽
                 </button>
             </div>
         </div>
@@ -154,5 +164,38 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // 登入 Modal 控制
+        const loginModal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const browseWithoutLogin = document.getElementById('browseWithoutLogin');
+
+        function showLoginModal() {
+            loginModal.classList.remove('hidden');
+            loginModal.classList.add('flex');
+        }
+
+        function hideLoginModal() {
+            loginModal.classList.add('hidden');
+            loginModal.classList.remove('flex');
+        }
+
+        loginBtn.addEventListener('click', showLoginModal);
+        mobileLoginBtn.addEventListener('click', showLoginModal);
+        closeLoginModal.addEventListener('click', hideLoginModal);
+        browseWithoutLogin.addEventListener('click', hideLoginModal);
+
+        // 點擊 Modal 外部關閉
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                hideLoginModal();
+            }
+        });
+
+        // 其他 JavaScript 保持不變
+        // ... existing code ...
+    </script>
 </body>
 </html> 
