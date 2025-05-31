@@ -57,8 +57,8 @@
                     <h2 class="text-xl font-semibold mb-4">新增圖片</h2>
                     <form id="addImageForm" class="space-y-4">
                         <div>
-                            <label for="imageUrl" class="block text-sm font-medium text-gray-700">圖片網址</label>
-                            <input type="url" id="imageUrl" name="imageUrl" required
+                            <label for="imageFile" class="block text-sm font-medium text-gray-700">選擇圖片</label>
+                            <input type="file" id="imageFile" name="imageFile" accept="image/*" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
                         <div>
@@ -99,6 +99,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -113,6 +114,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
         const loginPanel = document.getElementById('loginPanel');
         const adminPanel = document.getElementById('adminPanel');
@@ -154,15 +156,26 @@
         // 新增圖片
         addImageForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const url = document.getElementById('imageUrl').value;
+            const fileInput = document.getElementById('imageFile');
+            const file = fileInput.files[0];
             const title = document.getElementById('imageTitle').value;
             const category = document.getElementById('imageCategory').value;
-
+            if (!file) {
+                alert('請選擇圖片檔案');
+                return;
+            }
             try {
+                // 上傳到 Firebase Storage
+                const filePath = `images/${Date.now()}_${file.name}`;
+                const imgRef = storageRef(storage, filePath);
+                await uploadBytes(imgRef, file);
+                const url = await getDownloadURL(imgRef);
+                // 存到 Firestore
                 await addDoc(collection(db, 'images'), {
                     url,
                     title,
                     category,
+                    storagePath: filePath,
                     active: true,
                     createdAt: serverTimestamp()
                 });
@@ -222,7 +235,22 @@
         window.deleteImage = async function(id) {
             if (confirm('確定要刪除這張圖片嗎？')) {
                 try {
-                    await deleteDoc(doc(db, 'images', id));
+                    // 先取得 Firestore 中的 storagePath
+                    const imageDoc = doc(db, 'images', id);
+                    const imageSnap = await getDocs(query(collection(db, 'images'), orderBy('createdAt', 'desc')));
+                    let storagePath = null;
+                    imageSnap.forEach(docItem => {
+                        if (docItem.id === id) {
+                            storagePath = docItem.data().storagePath;
+                        }
+                    });
+                    if (storagePath) {
+                        // 刪除 Storage 檔案
+                        const imgRef = storageRef(storage, storagePath);
+                        await deleteObject(imgRef);
+                    }
+                    // 刪除 Firestore 資料
+                    await deleteDoc(imageDoc);
                     loadImages();
                 } catch (error) {
                     alert('刪除圖片失敗：' + error.message);
