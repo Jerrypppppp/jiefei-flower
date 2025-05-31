@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捷菲花藝 - 專業花藝設計</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff6b6b',
+                        secondary: '#4a4a4a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans">
+    <!-- 導航欄 -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-secondary">捷菲花藝</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-secondary hover:text-primary transition-colors">首頁</a>
+                    <a href="#services" class="text-secondary hover:text-primary transition-colors">服務項目</a>
+                    <a href="#gallery" class="text-secondary hover:text-primary transition-colors">作品集</a>
+                    <a href="#about" class="text-secondary hover:text-primary transition-colors">關於我們</a>
+                    <a href="#contact" class="text-secondary hover:text-primary transition-colors">聯絡資訊</a>
+                </div>
+                <button class="md:hidden text-secondary">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄區塊 -->
+    <section id="home" class="relative h-screen flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490750967868-88aa4486c946')] bg-cover bg-center -z-10"></div>
+        <div class="text-center text-white z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">專業花藝設計</h1>
+            <p class="text-xl md:text-2xl">為您打造獨一無二的花藝體驗</p>
+        </div>
+    </section>
+
+    <!-- 服務項目 -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
+                    <i class="fas fa-birthday-cake text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">婚禮花藝</h3>
+                    <p class="text-gray-600">婚禮捧花、胸花、會場佈置</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
+                    <i class="fas fa-home text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">空間佈置</h3>
+                    <p class="text-gray-600">居家、辦公室花藝設計</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
+                    <i class="fas fa-gift text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">花禮設計</h3>
+                    <p class="text-gray-600">客製化花束、盆花設計</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="gallery" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">作品集</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                <!-- 圖片將由 JavaScript 動態載入 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">關於我們</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-lg text-gray-700">捷菲花藝致力於提供專業的花藝設計服務，為您打造獨特的花藝體驗。我們相信每一朵花都有其獨特的美，透過專業的設計，讓花藝成為生活中的藝術。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡資訊 -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">聯絡資訊</h2>
+            <div class="max-w-xl mx-auto">
+                <div class="space-y-4">
+                    <p class="flex items-center text-lg">
+                        <i class="fas fa-phone text-primary w-8"></i>
+                        電話：02-XXXX-XXXX
+                    </p>
+                    <p class="flex items-center text-lg">
+                        <i class="fas fa-envelope text-primary w-8"></i>
+                        Email：contact@example.com
+                    </p>
+                    <p class="flex items-center text-lg">
+                        <i class="fas fa-map-marker-alt text-primary w-8"></i>
+                        地址：台北市XX區XX路XX號
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 捷菲花藝. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
