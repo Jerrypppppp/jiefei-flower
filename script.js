@@ -1,28 +1,27 @@
-// 圖片資料
-const galleryImages = [
-    {
-        url: 'images/wedding.jpg',
-        title: '婚禮花藝',
-        category: '婚禮'
-    },
-    {
-        url: 'images/space.jpg',
-        title: '空間佈置',
-        category: '空間'
-    },
-    {
-        url: 'images/gift.jpg',
-        title: '花禮設計',
-        category: '花禮'
-    }
-];
+// Firestore 讀取圖片
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// 載入圖片到作品集
-function loadGalleryImages() {
+const firebaseConfig = {
+    apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
+    authDomain: "jiefei-flower.firebaseapp.com",
+    projectId: "jiefei-flower",
+    storageBucket: "jiefei-flower.firebasestorage.app",
+    messagingSenderId: "761028186679",
+    appId: "1:761028186679:web:19b10716623861fc48a5b2",
+    measurementId: "G-G6FXQPJPPV"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadGalleryImages() {
     const galleryGrid = document.getElementById('gallery-grid');
     if (!galleryGrid) return;
-
-    galleryImages.forEach(image => {
+    galleryGrid.innerHTML = '';
+    const q = query(collection(db, 'images'), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    snapshot.forEach(doc => {
+        const image = doc.data();
         const imageElement = document.createElement('div');
         imageElement.className = 'relative group overflow-hidden rounded-lg shadow-lg';
         imageElement.innerHTML = `
@@ -30,7 +29,6 @@ function loadGalleryImages() {
             <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div class="text-white text-center">
                     <h3 class="text-xl font-bold mb-2">${image.title}</h3>
-                    <p class="text-sm">${image.category}</p>
                 </div>
             </div>
         `;
@@ -38,7 +36,6 @@ function loadGalleryImages() {
     });
 }
 
-// 當頁面載入完成時執行
 document.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
 }); 
