@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>捷菲花藝 - 專業花藝設計</title>
+    <title>捷菲花藝 JVF</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -20,95 +20,49 @@
     </script>
 </head>
 <body class="font-sans bg-gray-50">
-    <!-- 導航欄 -->
+    <!-- Navbar 導覽列 -->
     <nav class="bg-white shadow-md fixed w-full top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold text-secondary">捷菲花藝</a>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="text-gray-600 hover:text-primary">關於我們</a>
-                    <a href="#services" class="text-gray-600 hover:text-primary">服務項目</a>
-                    <a href="#gallery" class="text-gray-600 hover:text-primary">作品集</a>
-                    <a href="#contact" class="text-gray-600 hover:text-primary">聯絡我們</a>
-                    <button id="loginBtn" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">
-                        登入
-                    </button>
-                </div>
-                <button id="mobileMenuBtn" class="md:hidden text-gray-600">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- LOGO 之後補上 -->
+                <span class="text-2xl font-bold text-secondary">捷菲花藝 JVF</span>
             </div>
-            <!-- 手機版選單 -->
-            <div id="mobileMenu" class="md:hidden hidden mt-4">
-                <a href="#about" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
-                <a href="#services" class="block py-2 text-gray-600 hover:text-primary">服務項目</a>
-                <a href="#gallery" class="block py-2 text-gray-600 hover:text-primary">作品集</a>
-                <a href="#contact" class="block py-2 text-gray-600 hover:text-primary">聯絡我們</a>
-                <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">
-                    登入
-                </button>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="text-gray-600 hover:text-primary">首頁</a>
+                <a href="#gallery" class="text-gray-600 hover:text-primary">作品集</a>
+                <a href="#services" class="text-gray-600 hover:text-primary">服務項目</a>
+                <a href="#about" class="text-gray-600 hover:text-primary">關於我們</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary">聯絡我們</a>
+                <button id="loginBtn" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 ml-4">登入</button>
             </div>
+            <button id="mobileMenuBtn" class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- 手機版選單（可展開） -->
+        <div id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+            <a href="#home" class="block py-2 text-gray-600 hover:text-primary">首頁</a>
+            <a href="#gallery" class="block py-2 text-gray-600 hover:text-primary">作品集</a>
+            <a href="#services" class="block py-2 text-gray-600 hover:text-primary">服務項目</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-primary">聯絡我們</a>
+            <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">登入</button>
         </div>
     </nav>
 
-    <!-- 登入選項 Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">登入選項</h2>
-                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="space-y-4">
-                <button id="googleLoginBtn" class="block w-full bg-blue-500 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-600">
-                    <i class="fab fa-google mr-2"></i>使用 Google 帳號登入
-                </button>
-                <a href="admin.html" class="block w-full bg-gray-500 text-white text-center px-6 py-3 rounded-lg hover:bg-gray-600">
-                    <i class="fas fa-user-shield mr-2"></i>管理員登入
-                </a>
-                <button id="browseWithoutLogin" class="block w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90">
-                    直接瀏覽
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 英雄區塊 -->
+    <!-- Hero Banner 首頁大圖＋品牌標語 -->
     <section id="home" class="relative h-screen flex items-center justify-center">
-        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1490750967868-88aa4486c946')] bg-cover bg-center -z-10"></div>
         <div class="text-center text-white z-10">
             <h1 class="text-5xl md:text-6xl font-bold mb-4">專業花藝設計</h1>
-            <p class="text-xl md:text-2xl">為您打造獨一無二的花藝體驗</p>
+            <p class="text-xl md:text-2xl mb-6">為您打造獨一無二的花藝體驗</p>
+            <!-- 品牌故事簡介（可串接 Firestore） -->
+            <p class="max-w-xl mx-auto text-lg">捷菲 JVF 這個品牌名字呢～是從 J 小姐與 V 先生 Jennifer&Vincent Floral 所發想出來，捷菲希望能將花草回歸至生活陪伴，生活裡有花，花裡有生活，與花草生活的日日。</p>
         </div>
     </section>
 
-    <!-- 服務項目 -->
-    <section id="services" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
-                    <i class="fas fa-birthday-cake text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">婚禮花藝</h3>
-                    <p class="text-gray-600">婚禮捧花、胸花、會場佈置</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
-                    <i class="fas fa-home text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">空間佈置</h3>
-                    <p class="text-gray-600">居家、辦公室花藝設計</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-8 text-center transform hover:-translate-y-2 transition-transform">
-                    <i class="fas fa-gift text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">花禮設計</h3>
-                    <p class="text-gray-600">客製化花束、盆花設計</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 作品集 -->
+    <!-- Gallery 作品集區塊 -->
     <section id="gallery" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12">作品集</h2>
@@ -118,20 +72,75 @@
         </div>
     </section>
 
-    <!-- 關於我們 -->
-    <section id="about" class="py-20 bg-gray-50">
+    <!-- Services 服務項目區塊 -->
+    <section id="services" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">關於我們</h2>
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="text-lg text-gray-700">捷菲花藝致力於提供專業的花藝設計服務，為您打造獨特的花藝體驗。我們相信每一朵花都有其獨特的美，透過專業的設計，讓花藝成為生活中的藝術。</p>
+            <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
+            <div class="flex overflow-x-auto space-x-4 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
+                <!-- 1. 空間花藝設計佈置 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="space">
+                    <i class="fas fa-seedling text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">空間花藝設計佈置</h3>
+                    <p class="text-gray-600">居家、商空、活動場地等空間花藝設計與佈置</p>
+                </div>
+                <!-- 2. 婚禮花藝設計佈置 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="wedding">
+                    <i class="fas fa-ring text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">婚禮花藝設計佈置</h3>
+                    <p class="text-gray-600">婚禮捧花、會場佈置、主題設計</p>
+                </div>
+                <!-- 3. 企業／門市週花服務 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="business">
+                    <i class="fas fa-briefcase text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">企業／門市週花服務</h3>
+                    <p class="text-gray-600">企業、門市、櫃位定期花藝佈置與維護</p>
+                </div>
+                <!-- 4. 花禮 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="gift">
+                    <i class="fas fa-gift text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">花禮</h3>
+                    <p class="text-gray-600">鮮花、蘭花、永生花、質感植栽、花籃等多樣花禮設計</p>
+                </div>
+                <!-- 5. 花藝課程 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="course">
+                    <i class="fas fa-chalkboard-teacher text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">花藝課程</h3>
+                    <p class="text-gray-600">生活花藝、企業團課、社區、到府教學，附課程照片與價目表</p>
+                </div>
+                <!-- 6. 花圃微景觀設計施作 -->
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="microgarden">
+                    <i class="fas fa-leaf text-5xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">花圃微景觀設計施作</h3>
+                    <p class="text-gray-600">微型花園、陽台、戶外空間綠化設計與施作</p>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 彈窗（預留，點擊卡片時顯示詳細內容與過去作品） -->
+        <div id="serviceModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-lg w-full mx-4 relative">
+                <button id="closeServiceModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-2xl">&times;</button>
+                <div id="serviceModalContent">
+                    <!-- 這裡會動態載入詳細內容與過去作品 -->
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 聯絡資訊 -->
-    <section id="contact" class="py-20">
+    <!-- About 品牌故事／關於我們區塊 -->
+    <section id="about" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">聯絡資訊</h2>
+            <h2 class="text-4xl font-bold text-center mb-12">關於我們</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- 品牌故事內容（可串接 Firestore） -->
+                <p class="text-lg text-gray-700">捷菲 JVF 這個品牌名字呢～是從 J 小姐與 V 先生 Jennifer&Vincent Floral 所發想出來，捷菲希望能將花草回歸至生活陪伴，生活裡有花，花裡有生活，與花草生活的日日。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact 聯絡資訊區塊 -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">聯絡我們</h2>
             <div class="max-w-xl mx-auto">
                 <div class="space-y-4">
                     <p class="flex items-center text-lg">
@@ -147,131 +156,151 @@
                         地址：台北市XX區XX路XX號
                     </p>
                 </div>
+                <!-- 聯絡表單（可串接 Firestore） -->
+                <form class="mt-8 space-y-4">
+                    <input type="text" placeholder="您的姓名" class="w-full rounded border-gray-300 p-3">
+                    <input type="email" placeholder="您的 Email" class="w-full rounded border-gray-300 p-3">
+                    <textarea placeholder="您的訊息" class="w-full rounded border-gray-300 p-3"></textarea>
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded hover:bg-primary/90">送出訊息</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- 頁尾 -->
+    <!-- Footer 頁尾 -->
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 捷菲花藝. All rights reserved.</p>
+            <p>&copy; 2024 捷菲花藝 JVF. All rights reserved.</p>
+            <!-- 社群連結（可串接 Firestore） -->
+            <div class="mt-2 space-x-4">
+                <a href="#" class="text-white hover:text-primary"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white hover:text-primary"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="text-white hover:text-primary"><i class="fab fa-line fa-lg"></i></a>
+            </div>
         </div>
     </footer>
 
-    <script type="module" src="script.js"></script>
-    
-    <!-- Firebase SDK -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <!-- 手機選單 JS（可優化） -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
-            authDomain: "jiefei-flower.firebaseapp.com",
-            projectId: "jiefei-flower",
-            storageBucket: "jiefei-flower.firebasestorage.app",
-            messagingSenderId: "761028186679",
-            appId: "1:761028186679:web:19b10716623861fc48a5b2",
-            measurementId: "G-G6FXQPJPPV"
-        };
+    <script>
+    // 服務卡片點擊彈窗互動
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceModal = document.getElementById('serviceModal');
+    const closeServiceModal = document.getElementById('closeServiceModal');
+    const serviceModalContent = document.getElementById('serviceModalContent');
 
-        // 檢查是否在 GitHub Pages 環境中運行
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        if (isGitHubPages) {
-            // 在 GitHub Pages 環境中，使用 HTTPS
-            firebaseConfig.authDomain = 'jiefei-flower.firebaseapp.com';
+    // 服務詳細內容（可改為串接 Firestore）
+    const serviceDetails = {
+        space: {
+            title: '空間花藝設計佈置',
+            desc: '提供居家、商空、活動場地等空間花藝設計與佈置服務，量身打造專屬氛圍。',
+            works: [], // 之後可放過去作品
+        },
+        wedding: {
+            title: '婚禮花藝設計佈置',
+            desc: '婚禮捧花、會場佈置、主題設計，讓您的婚禮充滿花草的浪漫氛圍。',
+            works: [],
+        },
+        business: {
+            title: '企業／門市週花服務',
+            desc: '企業、門市、櫃位定期花藝佈置與維護，提升空間質感。',
+            works: [],
+        },
+        gift: {
+            title: '花禮',
+            desc: '鮮花、蘭花、永生花、質感植栽、花籃等多樣花禮設計，適合各種場合。',
+            works: [],
+        },
+        course: {
+            title: '花藝課程',
+            desc: '生活花藝課程、企業團課、社區、到府教學，附課程照片與價目表。',
+            works: [],
+        },
+        microgarden: {
+            title: '花圃微景觀設計施作',
+            desc: '微型花園、陽台、戶外空間綠化設計與施作，打造專屬綠意角落。',
+            works: [],
+        },
+    };
+
+    serviceCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const key = card.getAttribute('data-service');
+            const detail = serviceDetails[key];
+            serviceModalContent.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">${detail.title}</h2>
+                <p class="mb-4 text-gray-700">${detail.desc}</p>
+                <div class="mb-2 font-semibold">過去相關作品：</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <!-- 之後可動態插入作品圖片 -->
+                    <div class="text-gray-400 text-sm">（未上傳作品，未來可由後台管理）</div>
+                </div>
+            `;
+            serviceModal.classList.remove('hidden');
+            serviceModal.classList.add('flex');
+        });
+    });
+    closeServiceModal.addEventListener('click', () => {
+        serviceModal.classList.add('hidden');
+        serviceModal.classList.remove('flex');
+    });
+    serviceModal.addEventListener('click', (e) => {
+        if (e.target === serviceModal) {
+            serviceModal.classList.add('hidden');
+            serviceModal.classList.remove('flex');
         }
+    });
+    </script>
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
+    <!-- 登入 Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">登入選項</h2>
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <button id="googleLoginBtn" class="block w-full bg-blue-500 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-600">
+                    <i class="fab fa-google mr-2"></i>使用 Google 帳號登入
+                </button>
+                <a href="admin.html" class="block w-full bg-gray-500 text-white text-center px-6 py-3 rounded-lg hover:bg-gray-600">
+                    <i class="fas fa-user-shield mr-2"></i>管理員登入
+                </a>
+            </div>
+        </div>
+    </div>
 
+    <script>
         // 登入 Modal 控制
         const loginModal = document.getElementById('loginModal');
         const loginBtn = document.getElementById('loginBtn');
         const mobileLoginBtn = document.getElementById('mobileLoginBtn');
         const closeLoginModal = document.getElementById('closeLoginModal');
-        const browseWithoutLogin = document.getElementById('browseWithoutLogin');
-        const googleLoginBtn = document.getElementById('googleLoginBtn');
 
         function showLoginModal() {
             loginModal.classList.remove('hidden');
             loginModal.classList.add('flex');
         }
-
         function hideLoginModal() {
             loginModal.classList.add('hidden');
             loginModal.classList.remove('flex');
         }
-
-        // Google 登入
-        googleLoginBtn.addEventListener('click', () => {
-            const provider = new GoogleAuthProvider();
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    // 登入成功
-                    hideLoginModal();
-                    // 更新按鈕文字
-                    loginBtn.textContent = '登出';
-                    mobileLoginBtn.textContent = '登出';
-                })
-                .catch((error) => {
-                    alert('登入失敗：' + error.message);
-                });
-        });
-
-        // 登出功能
-        function handleLogout() {
-            signOut(auth)
-                .then(() => {
-                    // 更新按鈕文字
-                    loginBtn.textContent = '登入';
-                    mobileLoginBtn.textContent = '登入';
-                })
-                .catch((error) => {
-                    alert('登出失敗：' + error.message);
-                });
-        }
-
-        // 監聽登入狀態
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // 已登入
-                loginBtn.textContent = '登出';
-                mobileLoginBtn.textContent = '登出';
-                loginBtn.onclick = handleLogout;
-                mobileLoginBtn.onclick = handleLogout;
-            } else {
-                // 未登入
-                loginBtn.textContent = '登入';
-                mobileLoginBtn.textContent = '登入';
-                loginBtn.onclick = showLoginModal;
-                mobileLoginBtn.onclick = showLoginModal;
-            }
-        });
-
         loginBtn.addEventListener('click', showLoginModal);
         mobileLoginBtn.addEventListener('click', showLoginModal);
         closeLoginModal.addEventListener('click', hideLoginModal);
-        browseWithoutLogin.addEventListener('click', hideLoginModal);
-
-        // 點擊 Modal 外部關閉
         loginModal.addEventListener('click', (e) => {
             if (e.target === loginModal) {
                 hideLoginModal();
             }
-        });
-
-        // 手機版選單切換
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
         });
     </script>
 </body>
