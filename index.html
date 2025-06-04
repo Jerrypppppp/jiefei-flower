@@ -279,30 +279,93 @@
         </div>
     </div>
 
-    <script>
-        // 登入 Modal 控制
-        const loginModal = document.getElementById('loginModal');
-        const loginBtn = document.getElementById('loginBtn');
-        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
-        const closeLoginModal = document.getElementById('closeLoginModal');
-
-        function showLoginModal() {
-            loginModal.classList.remove('hidden');
-            loginModal.classList.add('flex');
-        }
-        function hideLoginModal() {
-            loginModal.classList.add('hidden');
-            loginModal.classList.remove('flex');
-        }
-        loginBtn.addEventListener('click', showLoginModal);
-        mobileLoginBtn.addEventListener('click', showLoginModal);
-        closeLoginModal.addEventListener('click', hideLoginModal);
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                hideLoginModal();
-            }
-        });
-    </script>
     <script type="module" src="script.js"></script>
+    <script type="module">
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
+        authDomain: "jiefei-flower.firebaseapp.com",
+        projectId: "jiefei-flower",
+        storageBucket: "jiefei-flower.appspot.com",
+        messagingSenderId: "761028186679",
+        appId: "1:761028186679:web:19b10716623861fc48a5b2",
+        measurementId: "G-G6FXQPJPPV"
+    };
+
+    // 初始化 Firebase（避免重複）
+    const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 登入 Modal 控制
+    const loginModal = document.getElementById('loginModal');
+    const loginBtn = document.getElementById('loginBtn');
+    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+
+    function showLoginModal() {
+        loginModal.classList.remove('hidden');
+        loginModal.classList.add('flex');
+    }
+    function hideLoginModal() {
+        loginModal.classList.add('hidden');
+        loginModal.classList.remove('flex');
+    }
+    loginBtn.addEventListener('click', showLoginModal);
+    mobileLoginBtn.addEventListener('click', showLoginModal);
+    closeLoginModal.addEventListener('click', hideLoginModal);
+    loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            hideLoginModal();
+        }
+    });
+
+    // Google 登入
+    googleLoginBtn.addEventListener('click', () => {
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' }); // 每次都能選帳號
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                hideLoginModal();
+                updateLoginUI(result.user);
+            })
+            .catch((error) => {
+                alert('登入失敗：' + error.message);
+            });
+    });
+
+    // 登出功能
+    function handleLogout() {
+        signOut(auth)
+            .then(() => {
+                updateLoginUI(null);
+            })
+            .catch((error) => {
+                alert('登出失敗：' + error.message);
+            });
+    }
+
+    // 監聽登入狀態
+    onAuthStateChanged(auth, (user) => {
+        updateLoginUI(user);
+    });
+
+    // 更新登入按鈕 UI
+    function updateLoginUI(user) {
+        if (user) {
+            loginBtn.textContent = user.displayName + '（登出）';
+            mobileLoginBtn.textContent = user.displayName + '（登出）';
+            loginBtn.onclick = handleLogout;
+            mobileLoginBtn.onclick = handleLogout;
+        } else {
+            loginBtn.textContent = '登入';
+            mobileLoginBtn.textContent = '登入';
+            loginBtn.onclick = showLoginModal;
+            mobileLoginBtn.onclick = showLoginModal;
+        }
+    }
+    </script>
 </body>
 </html> 
