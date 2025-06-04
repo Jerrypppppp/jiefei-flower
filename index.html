@@ -350,6 +350,9 @@
     // 監聽登入狀態
     onAuthStateChanged(auth, (user) => {
         updateLoginUI(user);
+        if (user) {
+            hideLoginModal(); // 登入後自動關閉 Modal
+        }
     });
 
     // 更新登入按鈕 UI
