@@ -322,10 +322,23 @@
         }
     });
 
+    // WebView/內建瀏覽器偵測
+    function isInWebView() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if (/FBAN|FBAV|Instagram|Line|WebView|wv|; wv\)/i.test(ua)) return true;
+        if ((/iPhone|iPod|iPad/i.test(ua)) && !/Safari/i.test(ua)) return true;
+        if (/Android/.test(ua) && /Version\/\d+/.test(ua) && !/Chrome\//.test(ua)) return true;
+        return false;
+    }
+
     // Google 登入
     googleLoginBtn.addEventListener('click', () => {
+        if (isInWebView()) {
+            alert('App 內建瀏覽器無法使用 Google 登入，但您仍可瀏覽網站內容。如需登入，請用 Chrome/Safari 等標準瀏覽器開啟本網站。');
+            return;
+        }
         const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' }); // 每次都能選帳號
+        provider.setCustomParameters({ prompt: 'select_account' });
         signInWithPopup(auth, provider)
             .then((result) => {
                 hideLoginModal();
