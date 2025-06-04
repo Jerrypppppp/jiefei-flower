@@ -282,7 +282,7 @@
     <script type="module" src="script.js"></script>
     <script type="module">
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signInWithRedirect, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -326,14 +326,7 @@
     googleLoginBtn.addEventListener('click', () => {
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' }); // 每次都能選帳號
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                hideLoginModal();
-                updateLoginUI(result.user);
-            })
-            .catch((error) => {
-                alert('登入失敗：' + error.message);
-            });
+        signInWithRedirect(auth, provider);
     });
 
     // 登出功能
