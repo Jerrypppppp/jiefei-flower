@@ -279,45 +279,10 @@
         </div>
     </div>
 
-    <div id="webviewMask" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.85); color:white; justify-content:center; align-items:center; flex-direction:column;">
-        <div style="max-width:90vw; text-align:center;">
-            <h2 style="font-size:1.5rem; font-weight:bold; margin-bottom:1rem;">請用標準瀏覽器開啟</h2>
-            <p style="margin-bottom:1rem;">偵測到您目前是在 App 內建瀏覽器（如 LINE、IG、FB），Google 登入將無法使用。<br>請點右上角「...」選擇「在瀏覽器中開啟」，或複製下方網址到 Chrome/Safari 開啟。</p>
-            <div style="background:#222; padding:0.5rem 1rem; border-radius:6px; margin-bottom:1rem; word-break:break-all;" id="currentUrl"></div>
-            <button id="copyUrlBtn" style="background:#ff6b6b; color:white; padding:0.5rem 1.5rem; border-radius:6px; font-size:1rem;">複製網址</button>
-            <div id="copyMsg" style="margin-top:0.5rem; color:#90ee90; display:none;">已複製！請貼到瀏覽器開啟</div>
-        </div>
-    </div>
-    <script>
-    // WebView/內建瀏覽器偵測
-    function isInWebView() {
-        const ua = navigator.userAgent || navigator.vendor || window.opera;
-        // 常見 App 內建瀏覽器判斷
-        if (/FBAN|FBAV|Instagram|Line|WebView|wv|; wv\)/i.test(ua)) return true;
-        // iOS
-        if ((/iPhone|iPod|iPad/i.test(ua)) && !/Safari/i.test(ua)) return true;
-        // Android Chrome WebView
-        if (/Android/.test(ua) && /Version\/\d+/.test(ua) && !/Chrome\//.test(ua)) return true;
-        return false;
-    }
-    if (isInWebView()) {
-        const mask = document.getElementById('webviewMask');
-        mask.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        document.getElementById('currentUrl').textContent = window.location.href;
-        document.getElementById('copyUrlBtn').onclick = function() {
-            navigator.clipboard.writeText(window.location.href).then(function(){
-                document.getElementById('copyMsg').style.display = 'block';
-                setTimeout(()=>{document.getElementById('copyMsg').style.display = 'none';}, 2000);
-            });
-        };
-    }
-    </script>
-
     <script type="module" src="script.js"></script>
     <script type="module">
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithRedirect, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -361,7 +326,14 @@
     googleLoginBtn.addEventListener('click', () => {
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' }); // 每次都能選帳號
-        signInWithRedirect(auth, provider);
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                hideLoginModal();
+                updateLoginUI(result.user);
+            })
+            .catch((error) => {
+                alert('登入失敗：' + error.message);
+            });
     });
 
     // 登出功能
