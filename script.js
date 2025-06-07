@@ -1,6 +1,6 @@
 // Firestore 讀取圖片
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, orderBy, query, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -38,4 +38,37 @@ async function loadGalleryImages() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
-}); 
+});
+
+const bookingForm = document.getElementById('bookingForm');
+const bookingMsg = document.getElementById('bookingMsg');
+
+if (bookingForm) {
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userName = document.getElementById('userName').value;
+    const userEmail = document.getElementById('userEmail').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const note = document.getElementById('note').value;
+
+    try {
+      await addDoc(collection(db, 'orders'), {
+        userName,
+        userEmail,
+        phone,
+        date,
+        time,
+        note,
+        status: 'new',
+        createdAt: serverTimestamp()
+      });
+      bookingForm.reset();
+      bookingMsg.classList.remove('hidden');
+      setTimeout(() => bookingMsg.classList.add('hidden'), 4000);
+    } catch (error) {
+      alert('預約失敗：' + error.message);
+    }
+  });
+} 
