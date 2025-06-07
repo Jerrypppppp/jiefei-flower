@@ -1,17 +1,9 @@
 // Firestore 讀取圖片
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, getDocs, orderBy, query, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
-    authDomain: "jiefei-flower.firebaseapp.com",
-    projectId: "jiefei-flower",
-    storageBucket: "jiefei-flower.appspot.com",
-    messagingSenderId: "761028186679",
-    appId: "1:761028186679:web:19b10716623861fc48a5b2",
-    measurementId: "G-G6FXQPJPPV"
-};
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+// 只取得現有 app instance，不再初始化
+const app = getApps()[0];
 const db = getFirestore(app);
 
 async function loadGalleryImages() {
