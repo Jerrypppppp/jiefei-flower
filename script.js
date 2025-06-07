@@ -1,5 +1,5 @@
 // Firestore 讀取圖片
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, getDocs, orderBy, query, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -11,7 +11,7 @@ const firebaseConfig = {
     appId: "1:761028186679:web:19b10716623861fc48a5b2",
     measurementId: "G-G6FXQPJPPV"
 };
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function loadGalleryImages() {
