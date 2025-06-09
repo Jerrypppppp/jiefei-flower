@@ -64,6 +64,10 @@ logoutBtn.addEventListener('click', () => {
 // 新增圖片
 addImageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!auth.currentUser) {
+        alert('請先登入管理員帳號！');
+        return;
+    }
     const fileInput = document.getElementById('imageFile');
     const file = fileInput.files[0];
     const title = document.getElementById('imageTitle').value;
@@ -73,20 +77,26 @@ addImageForm.addEventListener('submit', async (e) => {
         alert('請選擇圖片檔案');
         return;
     }
-    
+    if (!title.trim()) {
+        alert('請輸入標題');
+        return;
+    }
+    if (!category.trim()) {
+        alert('請選擇分類');
+        return;
+    }
     try {
         // 上傳到 Firebase Storage
         const filePath = `images/${Date.now()}_${file.name}`;
         const imgRef = storageRef(storage, filePath);
         const metadata = {
-            contentType: file.type,
-            customMetadata: {
-                'Access-Control-Allow-Origin': '*'
-            }
+            contentType: file.type
         };
         await uploadBytes(imgRef, file, metadata);
         const url = await getDownloadURL(imgRef);
-        
+        if (!url.includes('appspot.com')) {
+            throw new Error('取得圖片下載連結失敗，請稍後再試。');
+        }
         // 存到 Firestore
         await addDoc(collection(db, 'images'), {
             url,
@@ -96,12 +106,11 @@ addImageForm.addEventListener('submit', async (e) => {
             active: true,
             createdAt: serverTimestamp()
         });
-        
         addImageForm.reset();
         loadImages();
         alert('圖片已上傳，前台作品集將自動顯示。');
     } catch (error) {
-        alert('新增圖片失敗：' + error.message);
+        alert('新增圖片失敗：' + (error.message || error));
     }
 });
 
