@@ -78,7 +78,13 @@ addImageForm.addEventListener('submit', async (e) => {
         // 上傳到 Firebase Storage
         const filePath = `images/${Date.now()}_${file.name}`;
         const imgRef = storageRef(storage, filePath);
-        await uploadBytes(imgRef, file);
+        const metadata = {
+            contentType: file.type,
+            customMetadata: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        };
+        await uploadBytes(imgRef, file, metadata);
         const url = await getDownloadURL(imgRef);
         
         // 存到 Firestore
