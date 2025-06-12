@@ -78,51 +78,64 @@
             <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
             <div class="flex overflow-x-auto space-x-4 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
                 <!-- 1. 空間花藝設計佈置 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="space">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="space" onclick="showServiceImages('space')">
                     <i class="fas fa-seedling text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">空間花藝設計佈置</h3>
                     <p class="text-gray-600">居家、商空、活動場地等空間花藝設計與佈置</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
                 <!-- 2. 婚禮花藝設計佈置 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="wedding">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="wedding" onclick="showServiceImages('wedding')">
                     <i class="fas fa-ring text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">婚禮花藝設計佈置</h3>
                     <p class="text-gray-600">婚禮捧花、會場佈置、主題設計</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
                 <!-- 3. 企業／門市週花服務 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="business">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="business" onclick="showServiceImages('business')">
                     <i class="fas fa-briefcase text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">企業／門市週花服務</h3>
                     <p class="text-gray-600">企業、門市、櫃位定期花藝佈置與維護</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
                 <!-- 4. 花禮 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="gift">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="gift" onclick="showServiceImages('gift')">
                     <i class="fas fa-gift text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">花禮</h3>
                     <p class="text-gray-600">鮮花、蘭花、永生花、質感植栽、花籃等多樣花禮設計</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
                 <!-- 5. 花藝課程 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="course">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="course" onclick="showServiceImages('course')">
                     <i class="fas fa-chalkboard-teacher text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">花藝課程</h3>
                     <p class="text-gray-600">生活花藝、企業團課、社區、到府教學，附課程照片與價目表</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
                 <!-- 6. 花圃微景觀設計施作 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="microgarden">
+                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="microgarden" onclick="showServiceImages('microgarden')">
                     <i class="fas fa-leaf text-5xl text-primary mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">花圃微景觀設計施作</h3>
                     <p class="text-gray-600">微型花園、陽台、戶外空間綠化設計與施作</p>
+                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                 </div>
             </div>
         </div>
-        <!-- Modal 彈窗（預留，點擊卡片時顯示詳細內容與過去作品） -->
+        <!-- Modal 彈窗 -->
         <div id="serviceModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-8 max-w-lg w-full mx-4 relative">
-                <button id="closeServiceModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-2xl">&times;</button>
-                <div id="serviceModalContent">
-                    <!-- 這裡會動態載入詳細內容與過去作品 -->
+            <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 relative">
+                <button id="closeServiceModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-2xl" onclick="closeServiceModal()">&times;</button>
+                <div id="serviceModalContent" class="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto max-h-[80vh]">
+                    <!-- 圖片將由 JavaScript 動態載入 -->
                 </div>
             </div>
+        </div>
+        <!-- Lightbox 圖片預覽 -->
+        <div id="lightboxModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[100]">
+            <button id="closeLightbox" class="absolute top-6 right-8 text-white text-3xl z-20">&times;</button>
+            <button id="prevLightbox" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl z-20">&#8592;</button>
+            <button id="nextLightbox" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl z-20">&#8594;</button>
+            <img id="lightboxImg" src="" alt="預覽圖片" class="max-w-full max-h-[90vh] rounded shadow-lg z-10">
         </div>
     </section>
 
@@ -190,73 +203,132 @@
     </script>
 
     <script>
-    // 服務卡片點擊彈窗互動
-    const serviceCards = document.querySelectorAll('.service-card');
-    const serviceModal = document.getElementById('serviceModal');
-    const closeServiceModal = document.getElementById('closeServiceModal');
-    const serviceModalContent = document.getElementById('serviceModalContent');
-
-    // 服務詳細內容（可改為串接 Firestore）
-    const serviceDetails = {
-        space: {
-            title: '空間花藝設計佈置',
-            desc: '提供居家、商空、活動場地等空間花藝設計與佈置服務，量身打造專屬氛圍。',
-            works: [], // 之後可放過去作品
-        },
-        wedding: {
-            title: '婚禮花藝設計佈置',
-            desc: '婚禮捧花、會場佈置、主題設計，讓您的婚禮充滿花草的浪漫氛圍。',
-            works: [],
-        },
-        business: {
-            title: '企業／門市週花服務',
-            desc: '企業、門市、櫃位定期花藝佈置與維護，提升空間質感。',
-            works: [],
-        },
-        gift: {
-            title: '花禮',
-            desc: '鮮花、蘭花、永生花、質感植栽、花籃等多樣花禮設計，適合各種場合。',
-            works: [],
-        },
-        course: {
-            title: '花藝課程',
-            desc: '生活花藝課程、企業團課、社區、到府教學，附課程照片與價目表。',
-            works: [],
-        },
-        microgarden: {
-            title: '花圃微景觀設計施作',
-            desc: '微型花園、陽台、戶外空間綠化設計與施作，打造專屬綠意角落。',
-            works: [],
-        },
+    // 服務圖片資料
+    const serviceImages = {
+        space: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/space%2FIMG_0001.JPG?alt=media&token=xxx',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/space%2FIMG_0002.JPG?alt=media&token=xxx'
+        ],
+        wedding: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/wedding%2FIMG_0003.JPG?alt=media&token=xxx',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/wedding%2FIMG_0004.JPG?alt=media&token=xxx'
+        ],
+        business: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/business%2FIMG_0005.JPG?alt=media&token=xxx',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/business%2FIMG_0006.JPG?alt=media&token=xxx'
+        ],
+        gift: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0221.JPG?alt=media&token=6e335ad8-4884-400d-abe0-7839ab01dcc8',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0222.JPG?alt=media&token=d2be005a-9b93-487c-8b5c-674860d060ec',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0223.JPG?alt=media&token=c0db119c-6ec8-4dbf-ad70-04856b45521a',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0224.JPG?alt=media&token=ea88cfb1-fd0d-4c80-9cb6-0eb3591eeb61',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0225.JPG?alt=media&token=2c6ea8ed-2988-4b5d-b81d-fbe0439cd708',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0226.JPG?alt=media&token=d083252c-e600-4e99-b185-c4d291833f56'
+        ],
+        course: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/course%2FIMG_0007.JPG?alt=media&token=xxx',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/course%2FIMG_0008.JPG?alt=media&token=xxx'
+        ],
+        microgarden: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0292.JPG?alt=media&token=dd54fc8c-83c6-41fa-8492-0f8de6956cca',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0293.JPG?alt=media&token=4495a747-d643-455a-8d8b-9faa882417d2',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0294.JPG?alt=media&token=e0ea1407-aa57-49ba-8aa5-8a620c7a91cc',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0295.JPG?alt=media&token=e10d1e5d-a67d-4d59-8d2e-30c0323f2d5d'
+        ]
     };
 
-    serviceCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const key = card.getAttribute('data-service');
-            const detail = serviceDetails[key];
-            serviceModalContent.innerHTML = `
-                <h2 class="text-2xl font-bold mb-4">${detail.title}</h2>
-                <p class="mb-4 text-gray-700">${detail.desc}</p>
-                <div class="mb-2 font-semibold">過去相關作品：</div>
-                <div class="grid grid-cols-2 gap-2">
-                    <!-- 之後可動態插入作品圖片 -->
-                    <div class="text-gray-400 text-sm">（未上傳作品，未來可由後台管理）</div>
-                </div>
-            `;
-            serviceModal.classList.remove('hidden');
-            serviceModal.classList.add('flex');
+    // 顯示服務圖片
+    function showServiceImages(serviceType) {
+        const modal = document.getElementById('serviceModal');
+        const modalContent = document.getElementById('serviceModalContent');
+        const images = serviceImages[serviceType];
+        
+        // 清空現有內容
+        modalContent.innerHTML = '';
+        
+        // 添加圖片
+        images.forEach((imageUrl, idx) => {
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'relative overflow-hidden w-full h-72';
+            
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.className = 'w-full h-full object-contain';
+            img.alt = '服務圖片';
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function() {
+                openLightbox(images, idx);
+            });
+            
+            imgContainer.appendChild(img);
+            modalContent.appendChild(imgContainer);
         });
-    });
-    closeServiceModal.addEventListener('click', () => {
-        serviceModal.classList.add('hidden');
-        serviceModal.classList.remove('flex');
-    });
-    serviceModal.addEventListener('click', (e) => {
-        if (e.target === serviceModal) {
-            serviceModal.classList.add('hidden');
-            serviceModal.classList.remove('flex');
+        
+        // 顯示模態框
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        // 鎖定背景滾動
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 關閉服務模態框
+    function closeServiceModal() {
+        const modal = document.getElementById('serviceModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        // 恢復背景滾動
+        document.body.style.overflow = '';
+    }
+
+    // 點擊模態框外部關閉
+    document.getElementById('serviceModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeServiceModal();
         }
     });
+
+    // Lightbox 功能
+    let currentLightboxImages = [];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(images, idx) {
+        const lightbox = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+        currentLightboxImages = images;
+        currentLightboxIndex = idx;
+        lightboxImg.src = images[idx];
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightboxModal');
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+
+    function showLightboxImg(idx) {
+        const lightboxImg = document.getElementById('lightboxImg');
+        if (idx < 0) idx = currentLightboxImages.length - 1;
+        if (idx >= currentLightboxImages.length) idx = 0;
+        currentLightboxIndex = idx;
+        lightboxImg.src = currentLightboxImages[idx];
+    }
+
+    document.getElementById('closeLightbox').onclick = closeLightbox;
+    document.getElementById('lightboxModal').onclick = function(e) {
+        if (e.target === this) closeLightbox();
+    };
+    document.getElementById('prevLightbox').onclick = function(e) {
+        e.stopPropagation();
+        showLightboxImg(currentLightboxIndex - 1);
+    };
+    document.getElementById('nextLightbox').onclick = function(e) {
+        e.stopPropagation();
+        showLightboxImg(currentLightboxIndex + 1);
+    };
     </script>
 
     <!-- 登入 Modal -->
@@ -288,7 +360,7 @@
         apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
         authDomain: "jiefei-flower.firebaseapp.com",
         projectId: "jiefei-flower",
-        storageBucket: "jiefei-flower.appspot.com",
+        storageBucket: "jiefei-flower.firebasestorage.app",
         messagingSenderId: "761028186679",
         appId: "1:761028186679:web:19b10716623861fc48a5b2",
         measurementId: "G-G6FXQPJPPV"
