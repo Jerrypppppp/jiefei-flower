@@ -3,7 +3,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
     authDomain: "jiefei-flower.firebaseapp.com",
     projectId: "jiefei-flower",
-    storageBucket: "jiefei-flower.appspot.com",
+    storageBucket: "jiefei-flower.firebasestorage.app",
     messagingSenderId: "761028186679",
     appId: "1:761028186679:web:19b10716623861fc48a5b2",
     measurementId: "G-G6FXQPJPPV"
@@ -27,6 +27,7 @@ const loginPanel = document.getElementById('loginPanel');
 const logoutBtn = document.getElementById('logoutBtn');
 const addImageForm = document.getElementById('addImageForm');
 const imageList = document.getElementById('imageList');
+
 const adminWelcome = document.getElementById('adminWelcome');
 
 // 檢查登入狀態
@@ -86,15 +87,17 @@ addImageForm.addEventListener('submit', async (e) => {
         return;
     }
     try {
-        // 上傳到 Firebase Storage
-        const filePath = `images/${Date.now()}_${file.name}`;
+        // 產生亂數英文檔名，避免中文檔名問題
+        const randomString = Math.random().toString(36).substring(2, 10);
+        const ext = file.name.split('.').pop();
+        const filePath = `images/${Date.now()}_${randomString}.${ext}`;
         const imgRef = storageRef(storage, filePath);
         const metadata = {
             contentType: file.type
         };
         await uploadBytes(imgRef, file, metadata);
         const url = await getDownloadURL(imgRef);
-        if (!url.includes('appspot.com')) {
+        if (!url.includes('firebasestorage.app')) {
             throw new Error('取得圖片下載連結失敗，請稍後再試。');
         }
         // 存到 Firestore
@@ -123,6 +126,8 @@ async function loadImages() {
         
         snapshot.forEach(doc => {
             const image = doc.data();
+            // 只顯示 url 格式正確的圖片
+            if (!image.url || !image.url.includes('alt=media')) return;
             const div = document.createElement('div');
             div.className = 'bg-white rounded-lg shadow-md overflow-hidden';
             div.innerHTML = `
