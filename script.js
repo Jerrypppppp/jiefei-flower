@@ -23,7 +23,8 @@ async function loadGalleryImages() {
     snapshot.forEach(doc => {
         const image = doc.data();
         const imageElement = document.createElement('div');
-        imageElement.className = 'relative group overflow-hidden rounded-lg shadow-lg';
+        imageElement.className = 'relative group overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-72 md:w-auto' ;
+        imageElement.style.scrollSnapAlign = 'start';
         imageElement.innerHTML = `
             <img src="${image.url}" alt="${image.title}" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-300">
             <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
