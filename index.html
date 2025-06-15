@@ -18,14 +18,85 @@
             }
         }
     </script>
+    <style>
+        .service-card {
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 4px 24px 0 rgba(62,198,224,0.10);
+            border-radius: 1.5rem;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            box-shadow: 0 16px 40px 0 rgba(62,198,224,0.22), 0 2px 8px 0 rgba(0,0,0,0.06);
+            transform: translateY(-10px) scale(1.04);
+        }
+        .service-card .icon-bg {
+            background: linear-gradient(135deg, #6db3a0 0%, #3ec6e0 100%);
+            border-radius: 9999px;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 12px 0 rgba(62,198,224,0.18);
+        }
+        .service-card:hover .icon-bg {
+            transform: scale(1.10) rotate(-8deg);
+        }
+        .service-card .service-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #217a8a;
+            margin-bottom: 0.5rem;
+        }
+        .service-card .service-tip {
+            color: #3ec6e0;
+            font-size: 0.98rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+        .service-card .dot {
+            width: 8px; height: 8px; background: #3ec6e0; border-radius: 50%; margin: 1rem auto 0 auto;
+        }
+        .hero-title {
+            font-family: 'Noto Sans TC', 'Montserrat', 'Arial', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        }
+        .hero-subtitle {
+            font-family: 'Noto Sans TC', 'Montserrat', 'Arial', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-story {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.08rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            line-height: 2.1;
+            color: #f3f3f3;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.10);
+            max-width: 38em;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Navbar 導覽列 -->
     <nav class="bg-white shadow-md fixed w-full top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <!-- LOGO 之後補上 -->
-                <span class="text-2xl font-bold text-secondary">捷菲花藝 JVF</span>
+                <a href="#home" class="flex items-center space-x-2">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2FJF%E9%95%B7%E6%96%B9%E5%BD%A2logo.JPG?alt=media&token=1583b5a3-34f0-4d50-bb99-4e875c056571" alt="捷菲花藝 JVF Logo" class="h-12 w-auto object-contain" style="max-height:48px;">
+                </a>
             </div>
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#home" class="text-gray-600 hover:text-primary">首頁</a>
@@ -53,12 +124,11 @@
     <!-- Hero Banner 首頁大圖＋品牌標語 -->
     <section id="home" class="relative h-screen flex items-center justify-center">
         <div class="absolute inset-0 bg-black/40"></div>
-        <div class="absolute inset-0 bg-[url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%B0%81%E9%9D%A2.JPG?alt=media&token=0b066053-0d15-49f6-9fae-dcd609d56cea')] bg-cover bg-center -z-10"></div>
+        <div class="absolute inset-0 bg-[url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%B0%81%E9%9D%A2%2F%E5%B0%81%E9%9D%A22.JPG?alt=media&token=4dd51424-74b7-46d1-ae4f-a7de304b91fe')] bg-cover bg-center -z-10"></div>
         <div class="text-center text-white z-10">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">專業花藝設計</h1>
-            <p class="text-xl md:text-2xl mb-6">為您打造獨一無二的花藝體驗</p>
-            <!-- 品牌故事簡介（可串接 Firestore） -->
-            <p class="max-w-xl mx-auto text-lg">捷菲 JVF 這個品牌名字呢～是從 J 小姐與 V 先生 Jennifer&Vincent Floral 所發想出來，捷菲希望能將花草回歸至生活陪伴，生活裡有花，花裡有生活，與花草生活的日日。</p>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-title">專業花藝設計</h1>
+            <p class="hero-subtitle mb-6">為您打造獨一無二的花藝體驗</p>
+            <p class="hero-story">捷菲 JVF 這個品牌名字呢～是從 J 小姐與 V 先生 Jennifer&Vincent Floral 所發想出來，捷菲希望能將花草回歸至生活陪伴，生活裡有花，花裡有生活，與花草生活的日日。</p>
         </div>
     </section>
 
@@ -78,46 +148,58 @@
             <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
             <div class="flex overflow-x-auto space-x-4 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
                 <!-- 1. 空間花藝設計佈置 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="space" onclick="showServiceImages('space')">
-                    <i class="fas fa-seedling text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">空間花藝設計佈置</h3>
-                    <p class="text-gray-600">居家、商空、活動場地等空間花藝設計與佈置</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="space" onclick="showServiceImages('space')">
+                    <div class="icon-bg">
+                        <i class="fas fa-seedling text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">空間花藝設計佈置</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
                 <!-- 2. 婚禮花藝設計佈置 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="wedding" onclick="showServiceImages('wedding')">
-                    <i class="fas fa-ring text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">婚禮花藝設計佈置</h3>
-                    <p class="text-gray-600">婚禮捧花、會場佈置、主題設計</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="wedding" onclick="showServiceImages('wedding')">
+                    <div class="icon-bg">
+                        <i class="fas fa-ring text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">婚禮花藝設計佈置</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
                 <!-- 3. 企業／門市週花服務 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="business" onclick="showServiceImages('business')">
-                    <i class="fas fa-briefcase text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">企業／門市週花服務</h3>
-                    <p class="text-gray-600">企業、門市、櫃位定期花藝佈置與維護</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="business" onclick="showServiceImages('business')">
+                    <div class="icon-bg">
+                        <i class="fas fa-briefcase text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">企業／門市週花服務</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
                 <!-- 4. 花禮 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="gift" onclick="showServiceImages('gift')">
-                    <i class="fas fa-gift text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">花禮</h3>
-                    <p class="text-gray-600">鮮花、蘭花、永生花、質感植栽、花籃等多樣花禮設計</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="gift" onclick="showServiceImages('gift')">
+                    <div class="icon-bg">
+                        <i class="fas fa-gift text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">花禮</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
                 <!-- 5. 花藝課程 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="course" onclick="showServiceImages('course')">
-                    <i class="fas fa-chalkboard-teacher text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">花藝課程</h3>
-                    <p class="text-gray-600">生活花藝、企業團課、社區、到府教學，附課程照片與價目表</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="course" onclick="showServiceImages('course')">
+                    <div class="icon-bg">
+                        <i class="fas fa-chalkboard-teacher text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">花藝課程</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
                 <!-- 6. 花圃微景觀設計施作 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-8 text-center min-w-[260px] cursor-pointer transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300" data-service="microgarden" onclick="showServiceImages('microgarden')">
-                    <i class="fas fa-leaf text-5xl text-primary mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">花圃微景觀設計施作</h3>
-                    <p class="text-gray-600">微型花園、陽台、戶外空間綠化設計與施作</p>
-                    <p class="text-xs text-primary mt-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="microgarden" onclick="showServiceImages('microgarden')">
+                    <div class="icon-bg">
+                        <i class="fas fa-leaf text-white text-3xl"></i>
+                    </div>
+                    <h3 class="service-title">花圃微景觀設計施作</h3>
+                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <div class="dot"></div>
                 </div>
             </div>
         </div>
@@ -143,30 +225,43 @@
     <section id="about" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12">關於我們</h2>
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="text-lg text-gray-700 whitespace-pre-line">
-捷菲花藝是在最困難的Covid疫情時所誕生的～當時J小姐還在唸碩二服務於管理顧問公司擔任客座講師，無奈疫情打亂了所有的人生節奏🎵
-
-V先生深知J小姐心中一直有一座花園對花藝的渴望與憧憬。
-在V先生的鼓勵下誕生了「捷菲花藝」。
-之後也陸續拿到了國際荷蘭花藝師的證照DFA &ADFA。
-在捷菲的Logo-jvf（草寫）
-在J與F之間~
-有一個很重要的V，是V先生促成了J小姐與Floral 相遇。
-
-這條花藝之路，我們走的小心翼翼並亦步亦趨。每一張訂單、花藝課程的背後承載著～思考設計，擔心花材的萬一、流汗的搬運、積成草堆搬的除葉，載運時的小心翼翼。。
-
-最大的願望就是看見
-交付到客人手上時，臉上的那抹「微笑」、「開心」的樣子、那一聲「喜歡」，好像再難也不難了吧！
-這條路的終點還很遠
-我們會用熱情繼續前進
-更希望這條路上有您的參與。
-
-希望您也喜歡我們的小故事
-喜歡捷菲的風格。
-生活裡有花 花裡有生活
-與花草生活的日日。
+            <div class="max-w-2xl mx-auto text-center space-y-6">
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                    「捷菲花藝」誕生於最艱難的 Covid 疫情時期。<br>
+                    當時 J 小姐還在唸碩二，服務於管理顧問公司擔任客座講師，<br>
+                    無奈疫情打亂了所有的人生節奏 🎵
                 </p>
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                    <span class="font-semibold">V 先生</span>深知 J 小姐心中一直有一座花園，對花藝充滿渴望與憧憬。<br>
+                    在 V 先生的鼓勵下，「捷菲花藝」就這樣誕生了。<br>
+                    之後也陸續拿到了國際荷蘭花藝師證照 <span class="font-semibold">DFA & ADFA</span>。<br>
+                    捷菲的 J 與 F 之間，有個很重要的 <span class="font-semibold">V</span>，<br>
+                    正是 V 先生促成了 J 小姐與 Floral 的相遇。
+                </p>
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                    這條花藝之路，我們走得小心翼翼、亦步亦趨。<br>
+                    每一張訂單、每一堂花藝課程，背後都是無數的思考設計、<br>
+                    對花材的擔心、流汗的搬運、堆成草山的除葉，<br>
+                    以及載運時的戰戰兢兢……
+                </p>
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700 font-medium italic">
+                    最大的願望，就是看見交付到客人手上時，<br>
+                    臉上的那抹「微笑」、那份「開心」、那一句「喜歡」。<br>
+                    好像再難也不難了吧！
+                </p>
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                    這條路的終點還很遠，我們會用熱情繼續前進，<br>
+                    更希望這條路上有您的參與。
+                </p>
+                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                    希望您也喜歡我們的小故事，喜歡捷菲的風格。
+                </p>
+                <div class="my-8">
+                    <hr class="border-gray-200 mb-6">
+                    <div class="text-gray-500 text-sm md:text-base font-light leading-relaxed tracking-wide whitespace-pre-line">
+                        生活裡有花，花裡有生活<br>與花草生活的日日。
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -175,6 +270,16 @@ V先生深知J小姐心中一直有一座花園對花藝的渴望與憧憬。
     <section id="contact" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12">聯絡我們</h2>
+            <div class="max-w-xl mx-auto mb-8">
+                <div class="flex flex-col items-center justify-center gap-4">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2FJF%E6%AD%A3%E6%96%B9%E5%BD%A2logo.JPG?alt=media&token=cc03feb0-6c1b-4885-a6fb-c979e41d0094" alt="捷菲花藝 JVF 正方形 Logo" class="w-32 h-32 object-contain">
+                    <div class="flex flex-col items-center text-gray-700 text-base font-medium space-y-2 w-full">
+                        <div><span class="font-bold">工作室地址：</span>臺中市大里區中興路一段159-1號 4F</div>
+                        <div><span class="font-bold">聯絡電話：</span>04-2496-3299-1402</div>
+                        <div><span class="font-bold">Email：</span><a href="mailto:0601care@gmail.com" class="text-primary underline">0601care@gmail.com</a></div>
+                    </div>
+                </div>
+            </div>
             <div class="max-w-xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
                     <a href="https://www.facebook.com/JVF520/" target="_blank" class="flex flex-col items-center justify-center w-56 h-24 rounded-xl shadow-lg bg-blue-100 hover:bg-blue-500 hover:text-white transition-all duration-200 text-blue-700 text-lg font-semibold">
@@ -220,16 +325,45 @@ V先生深知J小姐心中一直有一座花園對花藝的渴望與憧憬。
     // 服務圖片資料
     const serviceImages = {
         space: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/space%2FIMG_0001.JPG?alt=media&token=xxx',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/space%2FIMG_0002.JPG?alt=media&token=xxx'
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F02FC3B65-D4D3-4D10-91C5-37EB2EC6E6B2.JPEG?alt=media&token=a5e47acc-5402-4fc3-8d01-731a065b37a0',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F1A81B6FF-AC7C-4356-9E7E-D524B3A8B767.JPEG?alt=media&token=4b3e0f10-d39c-4f23-813b-ea5f056acbcc',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F4531E3C0-C868-41BC-A4CC-7D39AF3D9430.JPEG?alt=media&token=28366e62-19c1-4b8a-9187-fe2e16dcd583',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F58235DBC-EA00-4EBF-9FA7-7CD2E2A50F68.JPEG?alt=media&token=24e63321-0f2c-401f-9e7e-d5cca19e272a',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F68503114-29F1-45AC-97EA-281683AF8DC7.JPEG?alt=media&token=3ab85081-3843-438b-b61d-b51d0d64227b',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F6A6597D2-761F-4B4B-89BD-9C0F3AF586ED.JPEG?alt=media&token=908a80b1-0d30-41d3-864c-09f1b4a90387'
         ],
         wedding: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/wedding%2FIMG_0003.JPG?alt=media&token=xxx',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/wedding%2FIMG_0004.JPG?alt=media&token=xxx'
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0358.JPG?alt=media&token=c95a571d-6426-4a6c-99d2-734a5c947457',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0360.JPG?alt=media&token=2f721a39-65e7-49df-9148-6a5c3fcfeec0',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0361.JPG?alt=media&token=8199ccd4-6d6d-4f40-80b9-d2c19249862e',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0362.JPG?alt=media&token=63522b1e-7b52-4abc-9367-09a236e36e1b',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0363.JPG?alt=media&token=3ceda94e-1773-4c76-b816-f869c32caca8',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0364.JPG?alt=media&token=48ffd430-4fc5-45ab-8656-db198e2e0445'
+        ],
+        course: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F585C7D32-785C-4195-93F7-5C415148354C.JPEG?alt=media&token=3d343132-0ce9-43f2-ad83-6c9038350fd8',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F6F5D8695-DB8D-4887-9EAE-04F6103F2B93.JPEG?alt=media&token=4f96bf5d-883d-4c5f-aab7-5e188dec5b86',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F7C4428A0-3EFC-4A9E-B090-FD5FED8292D8.JPEG?alt=media&token=6eca7458-a5e2-4b76-8ee7-308f74d32f92',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FBE0FB05C-BF14-4557-BD1D-57145E38CA4D.JPEG?alt=media&token=0133ee29-5b4f-4de3-a58f-1805b242fc88',
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FCE35EC47-0F7A-469B-B45C-2838B8D79049.JPEG?alt=media&token=5d376bd8-cfa5-44c8-aebd-38c427b15bcb",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FCEE23D95-07A2-4273-9718-BD913F344740.JPEG?alt=media&token=c13e4b06-1a1d-40e9-903d-10e81426b754",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FD5285838-0A22-4EE6-A70D-890C830D5276.JPEG?alt=media&token=b6ac656d-f22e-4304-93f1-53733583a33b",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FE228473D-C9E3-4C46-82EB-63BE69CA4210.JPEG?alt=media&token=a737f565-c455-43be-8951-1ca78c0e717b"
         ],
         business: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/business%2FIMG_0005.JPG?alt=media&token=xxx',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/business%2FIMG_0006.JPG?alt=media&token=xxx'
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F1F86558F-9A8F-41C6-B1A8-CABFE3595AC2.JPEG?alt=media&token=61dd59f6-0832-4246-9abf-affdcf943c70",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F2090D64A-D70B-47CD-86AF-C31DE1E53815.JPEG?alt=media&token=63f742c1-d7d9-44b1-ab0c-f051d83acb4e",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F82A5A72B-8586-4BF1-964D-1796DB36C07F.JPEG?alt=media&token=cd34141c-47f2-404f-9c83-4c9a7c1b8ecc",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F82AC001E-B3C3-4A1B-B026-093CC4E6794A.JPEG?alt=media&token=3d34ad75-0ebe-4d2a-8f99-2cb6fe543751",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F8A1B82A0-899B-4ABA-89C1-D3824A779794.JPEG?alt=media&token=26d1b455-35b9-4613-b0de-eeb2e2075d3f",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F8C1C61D1-3F07-4B59-B1E6-7EE0EA13CDD7.JPEG?alt=media&token=91eb07e0-d6dc-4996-800d-5953ee2fe816",
+            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F9B07CAE6-6C55-45CC-A829-C26BEACE8218.JPEG?alt=media&token=18107907-89ae-441d-bd9a-62320d22a86e"
+        ],
+        microgarden: [
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0292.JPG?alt=media&token=dd54fc8c-83c6-41fa-8492-0f8de6956cca',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0293.JPG?alt=media&token=4495a747-d643-455a-8d8b-9faa882417d2',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0294.JPG?alt=media&token=e0ea1407-aa57-49ba-8aa5-8a620c7a91cc',
+            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0295.JPG?alt=media&token=e10d1e5d-a67d-4d59-8d2e-30c0323f2d5d'
         ],
         gift: [
             'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0221.JPG?alt=media&token=6e335ad8-4884-400d-abe0-7839ab01dcc8',
@@ -238,16 +372,6 @@ V先生深知J小姐心中一直有一座花園對花藝的渴望與憧憬。
             'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0224.JPG?alt=media&token=ea88cfb1-fd0d-4c80-9cb6-0eb3591eeb61',
             'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0225.JPG?alt=media&token=2c6ea8ed-2988-4b5d-b81d-fbe0439cd708',
             'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0226.JPG?alt=media&token=d083252c-e600-4e99-b185-c4d291833f56'
-        ],
-        course: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/course%2FIMG_0007.JPG?alt=media&token=xxx',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/course%2FIMG_0008.JPG?alt=media&token=xxx'
-        ],
-        microgarden: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0292.JPG?alt=media&token=dd54fc8c-83c6-41fa-8492-0f8de6956cca',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0293.JPG?alt=media&token=4495a747-d643-455a-8d8b-9faa882417d2',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0294.JPG?alt=media&token=e0ea1407-aa57-49ba-8aa5-8a620c7a91cc',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0295.JPG?alt=media&token=e10d1e5d-a67d-4d59-8d2e-30c0323f2d5d'
         ]
     };
 
