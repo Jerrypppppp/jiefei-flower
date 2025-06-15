@@ -72,8 +72,6 @@ addImageForm.addEventListener('submit', async (e) => {
     const fileInput = document.getElementById('imageFile');
     const file = fileInput.files[0];
     const title = document.getElementById('imageTitle').value;
-    const category = document.getElementById('imageCategory').value;
-    
     if (!file) {
         alert('請選擇圖片檔案');
         return;
@@ -82,12 +80,7 @@ addImageForm.addEventListener('submit', async (e) => {
         alert('請輸入標題');
         return;
     }
-    if (!category.trim()) {
-        alert('請選擇分類');
-        return;
-    }
     try {
-        // 產生亂數英文檔名，避免中文檔名問題
         const randomString = Math.random().toString(36).substring(2, 10);
         const ext = file.name.split('.').pop();
         const filePath = `images/${Date.now()}_${randomString}.${ext}`;
@@ -100,11 +93,9 @@ addImageForm.addEventListener('submit', async (e) => {
         if (!url.includes('firebasestorage.app')) {
             throw new Error('取得圖片下載連結失敗，請稍後再試。');
         }
-        // 存到 Firestore
         await addDoc(collection(db, 'images'), {
             url,
             title,
-            category,
             storagePath: filePath,
             active: true,
             createdAt: serverTimestamp()

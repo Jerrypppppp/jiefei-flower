@@ -26,7 +26,10 @@ async function loadGalleryImages() {
         imageElement.className = 'relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-72 md:w-auto';
         imageElement.style.scrollSnapAlign = 'start';
         imageElement.innerHTML = `
-            <img src="${image.url}" alt="${image.title}" class="w-full h-64 object-cover cursor-zoom-in" data-lightbox="gallery">
+            <img src="${image.url}" alt="${image.title}" class="w-full h-64 object-cover cursor-zoom-in rounded-t-lg" data-lightbox="gallery">
+            <div class="bg-white text-center py-2 px-2 rounded-b-lg border-t border-gray-100">
+                <span class="block text-base font-semibold text-gray-700 tracking-wide truncate">${image.title || ''}</span>
+            </div>
         `;
         // 點擊圖片開啟 lightbox
         imageElement.querySelector('img').addEventListener('click', function() {
