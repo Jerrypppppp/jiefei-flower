@@ -103,23 +103,32 @@ function showServiceImages(serviceType) {
   modal.classList.remove('hidden');
   modal.classList.add('flex');
   document.body.style.overflow = 'hidden';
-  // 重新綁定叉叉
-  const closeBtn = document.getElementById('closeServiceModal');
-  if (closeBtn) closeBtn.onclick = closeServiceModal;
+}
+
+// 關閉服務圖片 modal
+function closeServiceModal() {
+  const modal = document.getElementById('serviceModal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  document.body.style.overflow = '';
 }
 
 // 初始化服務項目圖片功能
 async function initServiceImages() {
   await loadServiceImagesFromFirestore();
   bindServiceCardClicks();
+  
+  // 使用事件委派處理 modal 關閉按鈕
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'closeServiceModal') {
+      closeServiceModal();
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
     initServiceImages();
-    // 修正服務項目 modal 叉叉無法關閉問題
-    const closeBtn = document.getElementById('closeServiceModal');
-    if (closeBtn) closeBtn.onclick = closeServiceModal;
 });
 
 const bookingForm = document.getElementById('bookingForm');
