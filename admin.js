@@ -11,14 +11,20 @@ const firebaseConfig = {
 
 // 初始化 Firebase
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+
+// 設置持久化登入
+setPersistence(auth, browserLocalPersistence)
+    .catch((error) => {
+        console.error("Auth persistence error:", error);
+    });
 
 // DOM 元素
 const loginForm = document.getElementById('adminLoginForm');
@@ -38,6 +44,8 @@ const serviceImageListType = document.getElementById('serviceImageListType');
 // 檢查登入狀態
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        console.log('當前登入用戶:', user.email);
+        console.log('用戶認證狀態:', user.emailVerified);
         loginPanel.classList.add('hidden');
         adminPanel.classList.remove('hidden');
         adminWelcome.textContent = `歡迎，${user.email}`;
@@ -74,9 +82,15 @@ addImageForm.addEventListener('submit', async (e) => {
         alert('請先登入管理員帳號！');
         return;
     }
+
     const fileInput = document.getElementById('imageFile');
     const file = fileInput.files[0];
     const title = document.getElementById('imageTitle').value;
+    const uploadButton = document.getElementById('uploadButton');
+    const progressContainer = document.getElementById('uploadProgressContainer');
+    const progressBar = document.getElementById('uploadProgressBar');
+    const progressText = document.getElementById('uploadProgressText');
+
     if (!file) {
         alert('請選擇圖片檔案');
         return;
@@ -85,33 +99,84 @@ addImageForm.addEventListener('submit', async (e) => {
         alert('請輸入標題');
         return;
     }
+
     try {
+        // 禁用上傳按鈕並顯示進度條
+        uploadButton.disabled = true;
+        uploadButton.textContent = '上傳中...';
+        progressContainer.classList.remove('hidden');
+        
         const randomString = Math.random().toString(36).substring(2, 10);
         const ext = file.name.split('.').pop();
         const filePath = `images/${Date.now()}_${randomString}.${ext}`;
         const imgRef = storageRef(storage, filePath);
         const metadata = {
-            contentType: file.type
+            contentType: file.type,
+            customMetadata: {
+                uploadedBy: auth.currentUser.uid
+            }
         };
-        await uploadBytes(imgRef, file, metadata);
-        const url = await getDownloadURL(imgRef);
-        if (!url.includes('firebasestorage.app')) {
-            throw new Error('取得圖片下載連結失敗，請稍後再試。');
-        }
-        await addDoc(collection(db, 'images'), {
-            url,
-            title,
-            storagePath: filePath,
-            active: true,
-            createdAt: serverTimestamp()
-        });
-        addImageForm.reset();
-        loadImages();
-        alert('圖片已上傳，前台作品集將自動顯示。');
+
+        // 使用 uploadBytesResumable 來支援進度追蹤
+        const uploadTask = uploadBytesResumable(imgRef, file, metadata);
+
+        // 監聽上傳進度
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+            },
+            (error) => {
+                console.error('上傳錯誤:', error);
+                alert('上傳失敗：' + error.message);
+                resetUploadUI();
+            },
+            async () => {
+                try {
+                    const url = await getDownloadURL(imgRef);
+                    if (!url.includes('firebasestorage.app')) {
+                        throw new Error('取得圖片下載連結失敗，請稍後再試。');
+                    }
+                    await addDoc(collection(db, 'images'), {
+                        url,
+                        title,
+                        storagePath: filePath,
+                        active: true,
+                        createdAt: serverTimestamp(),
+                        uploadedBy: auth.currentUser.uid
+                    });
+                    addImageForm.reset();
+                    loadImages();
+                    alert('圖片已上傳，前台作品集將自動顯示。');
+                } catch (error) {
+                    console.error('保存記錄錯誤:', error);
+                    alert('新增圖片失敗：' + (error.message || error));
+                } finally {
+                    resetUploadUI();
+                }
+            }
+        );
     } catch (error) {
+        console.error('上傳過程錯誤:', error);
         alert('新增圖片失敗：' + (error.message || error));
+        resetUploadUI();
     }
 });
+
+// 重置上傳UI
+function resetUploadUI() {
+    const uploadButton = document.getElementById('uploadButton');
+    const progressContainer = document.getElementById('uploadProgressContainer');
+    const progressBar = document.getElementById('uploadProgressBar');
+    const progressText = document.getElementById('uploadProgressText');
+
+    uploadButton.disabled = false;
+    uploadButton.textContent = '新增圖片';
+    progressContainer.classList.add('hidden');
+    progressBar.style.width = '0%';
+    progressText.textContent = '0%';
+}
 
 // 載入圖片列表
 async function loadImages() {
@@ -183,11 +248,25 @@ if (addServiceImageForm) {
     }
     const type = document.getElementById('serviceType').value;
     const files = document.getElementById('serviceImageFile').files;
+    const uploadButton = document.getElementById('serviceUploadButton');
+    const progressContainer = document.getElementById('serviceUploadProgressContainer');
+    const progressBar = document.getElementById('serviceUploadProgressBar');
+    const progressText = document.getElementById('serviceUploadProgressText');
+
     if (!type || !files.length) {
       alert('請選擇服務類別並選擇圖片');
       return;
     }
+
     try {
+      // 禁用上傳按鈕並顯示進度條
+      uploadButton.disabled = true;
+      uploadButton.textContent = '上傳中...';
+      progressContainer.classList.remove('hidden');
+
+      let totalFiles = files.length;
+      let completedFiles = 0;
+
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const randomString = Math.random().toString(36).substring(2, 10);
@@ -195,20 +274,53 @@ if (addServiceImageForm) {
         const filePath = `service-images/${type}/${Date.now()}_${randomString}.${ext}`;
         const imgRef = storageRef(storage, filePath);
         const metadata = { contentType: file.type };
-        await uploadBytes(imgRef, file, metadata);
-        const url = await getDownloadURL(imgRef);
-        await addDoc(collection(db, 'serviceImages'), {
-          url,
-          type,
-          storagePath: filePath,
-          createdAt: serverTimestamp()
+
+        // 使用 uploadBytesResumable 來支援進度追蹤
+        const uploadTask = uploadBytesResumable(imgRef, file, metadata);
+
+        // 監聽上傳進度
+        await new Promise((resolve, reject) => {
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              const totalProgress = ((completedFiles + (progress / 100)) / totalFiles) * 100;
+              progressBar.style.width = totalProgress + '%';
+              progressText.textContent = Math.round(totalProgress) + '%';
+            },
+            (error) => {
+              reject(error);
+            },
+            async () => {
+              try {
+                const url = await getDownloadURL(imgRef);
+                await addDoc(collection(db, 'serviceImages'), {
+                  url,
+                  type,
+                  storagePath: filePath,
+                  createdAt: serverTimestamp()
+                });
+                completedFiles++;
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }
+          );
         });
       }
+
       addServiceImageForm.reset();
       loadServiceImages();
       alert('圖片已上傳！');
     } catch (error) {
       alert('上傳失敗：' + (error.message || error));
+    } finally {
+      // 重置上傳UI
+      uploadButton.disabled = false;
+      uploadButton.textContent = '上傳圖片';
+      progressContainer.classList.add('hidden');
+      progressBar.style.width = '0%';
+      progressText.textContent = '0%';
     }
   });
 }

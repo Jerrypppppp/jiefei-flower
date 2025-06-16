@@ -4,7 +4,11 @@ service firebase.storage {
   match /b/{bucket}/o {
     match /{allPaths=**} {
       allow read: if true;  // 允許所有人讀取
-      allow write: if request.auth != null;  // 只允許已登入用戶寫入
+      allow write: if request.auth != null && (
+        request.auth.token.email == "jvfloral@gmail.com" ||
+        request.auth.token.email == "pppppp1028wang@gmail.com" ||
+        request.auth.token.email == "wwwww1028wang@gmail.com"
+      );  // 只允許三個管理員帳號寫入
     }
   }
 } 

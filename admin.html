@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理員登入 - 捷菲花藝</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
     <script src="https://cdn.tailwindcss.com?v=20240712"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=20240712">
     <script>
@@ -66,7 +69,14 @@
                             <input type="text" id="imageTitle" name="imageTitle" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
-                        <button type="submit"
+                        <!-- 進度條容器 -->
+                        <div id="uploadProgressContainer" class="hidden">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="uploadProgressBar" class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="uploadProgressText" class="text-sm text-gray-600 mt-1 text-center">0%</p>
+                        </div>
+                        <button type="submit" id="uploadButton"
                             class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             新增圖片
                         </button>
@@ -94,7 +104,14 @@
                             <input type="file" id="serviceImageFile" name="serviceImageFile" accept="image/*" multiple required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
                         </div>
-                        <button type="submit"
+                        <!-- 服務項目上傳進度條容器 -->
+                        <div id="serviceUploadProgressContainer" class="hidden">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="serviceUploadProgressBar" class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="serviceUploadProgressText" class="text-sm text-gray-600 mt-1 text-center">0%</p>
+                        </div>
+                        <button type="submit" id="serviceUploadButton"
                             class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             上傳圖片
                         </button>
