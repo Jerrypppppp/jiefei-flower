@@ -73,6 +73,52 @@
                     </form>
                 </div>
 
+                <!-- 服務項目圖片管理 -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4">服務項目圖片管理</h2>
+                    <form id="addServiceImageForm" class="space-y-4 mb-6">
+                        <div>
+                            <label for="serviceType" class="block text-sm font-medium text-gray-700">服務類別</label>
+                            <select id="serviceType" name="serviceType" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                <option value="space">空間花藝設計佈置</option>
+                                <option value="wedding">婚禮花藝設計佈置</option>
+                                <option value="business">企業／門市週花服務</option>
+                                <option value="gift">花禮</option>
+                                <option value="course">花藝課程</option>
+                                <option value="microgarden">花圃微景觀設計施作</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="serviceImageFile" class="block text-sm font-medium text-gray-700">選擇圖片（可多選）</label>
+                            <input type="file" id="serviceImageFile" name="serviceImageFile" accept="image/*" multiple required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            上傳圖片
+                        </button>
+                    </form>
+                    <div class="mb-4 text-blue-600 text-center">
+                        管理各服務類別的圖片，刪除後前台會同步移除。
+                    </div>
+                    <div class="mb-4">
+                        <label for="serviceImageListType" class="block text-sm font-medium text-gray-700">選擇要管理的服務類別</label>
+                        <select id="serviceImageListType" name="serviceImageListType"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                            <option value="space">空間花藝設計佈置</option>
+                            <option value="wedding">婚禮花藝設計佈置</option>
+                            <option value="business">企業／門市週花服務</option>
+                            <option value="gift">花禮</option>
+                            <option value="course">花藝課程</option>
+                            <option value="microgarden">花圃微景觀設計施作</option>
+                        </select>
+                    </div>
+                    <div id="serviceImageList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- 服務項目圖片將在這裡動態載入 -->
+                    </div>
+                </div>
+
                 <!-- 圖片列表 -->
                 <div class="bg-gray-50 p-4 rounded-lg">
                     <h2 class="text-xl font-semibold mb-4">圖片列表</h2>

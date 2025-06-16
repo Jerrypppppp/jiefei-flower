@@ -30,6 +30,11 @@ const imageList = document.getElementById('imageList');
 
 const adminWelcome = document.getElementById('adminWelcome');
 
+// === 服務項目圖片管理 ===
+const addServiceImageForm = document.getElementById('addServiceImageForm');
+const serviceImageList = document.getElementById('serviceImageList');
+const serviceImageListType = document.getElementById('serviceImageListType');
+
 // 檢查登入狀態
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -166,4 +171,102 @@ window.deleteImage = async function(id) {
             alert('刪除圖片失敗：' + error.message);
         }
     }
-}; 
+};
+
+// 上傳服務項目圖片
+if (addServiceImageForm) {
+  addServiceImageForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!auth.currentUser) {
+      alert('請先登入管理員帳號！');
+      return;
+    }
+    const type = document.getElementById('serviceType').value;
+    const files = document.getElementById('serviceImageFile').files;
+    if (!type || !files.length) {
+      alert('請選擇服務類別並選擇圖片');
+      return;
+    }
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const randomString = Math.random().toString(36).substring(2, 10);
+        const ext = file.name.split('.').pop();
+        const filePath = `service-images/${type}/${Date.now()}_${randomString}.${ext}`;
+        const imgRef = storageRef(storage, filePath);
+        const metadata = { contentType: file.type };
+        await uploadBytes(imgRef, file, metadata);
+        const url = await getDownloadURL(imgRef);
+        await addDoc(collection(db, 'serviceImages'), {
+          url,
+          type,
+          storagePath: filePath,
+          createdAt: serverTimestamp()
+        });
+      }
+      addServiceImageForm.reset();
+      loadServiceImages();
+      alert('圖片已上傳！');
+    } catch (error) {
+      alert('上傳失敗：' + (error.message || error));
+    }
+  });
+}
+
+// 載入服務項目圖片
+async function loadServiceImages() {
+  if (!serviceImageList) return;
+  const type = serviceImageListType.value;
+  serviceImageList.innerHTML = '<div class="col-span-full text-center text-gray-400">載入中...</div>';
+  try {
+    const q = query(collection(db, 'serviceImages'), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    serviceImageList.innerHTML = '';
+    let found = false;
+    snapshot.forEach(docItem => {
+      const img = docItem.data();
+      if (img.type !== type) return;
+      found = true;
+      const div = document.createElement('div');
+      div.className = 'bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center';
+      div.innerHTML = `
+        <img src="${img.url}" alt="服務圖片" class="w-full h-48 object-cover mb-2">
+        <button onclick="window.deleteServiceImage('${docItem.id}', '${img.storagePath}')" class="text-red-500 hover:text-red-700 px-3 py-1 rounded bg-red-100 mb-2">刪除</button>
+        <p class="text-xs text-gray-400 break-all">${img.storagePath}</p>
+      `;
+      serviceImageList.appendChild(div);
+    });
+    if (!found) {
+      serviceImageList.innerHTML = '<div class="col-span-full text-center text-gray-400">此類別暫無圖片</div>';
+    }
+  } catch (error) {
+    serviceImageList.innerHTML = '<div class="col-span-full text-center text-red-500">載入失敗</div>';
+  }
+}
+
+// 監聽類別切換
+if (serviceImageListType) {
+  serviceImageListType.addEventListener('change', loadServiceImages);
+}
+
+// 刪除服務項目圖片
+window.deleteServiceImage = async function(id, storagePath) {
+  if (confirm('確定要刪除這張圖片嗎？')) {
+    try {
+      if (storagePath) {
+        const imgRef = storageRef(storage, storagePath);
+        await deleteObject(imgRef);
+      }
+      await deleteDoc(doc(db, 'serviceImages', id));
+      loadServiceImages();
+      alert('圖片已刪除！');
+    } catch (error) {
+      alert('刪除失敗：' + error.message);
+    }
+  }
+};
+
+// 登入後自動載入服務項目圖片
+if (auth.currentUser) {
+  loadServiceImages();
+} 

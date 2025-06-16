@@ -164,6 +164,58 @@
                 position: relative;
                 z-index: 2;
             }
+            .about-quote-bg {
+                background: url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%89%8B%E7%95%AB%E5%B0%81%E9%9D%A2.JPG?alt=media&token=4946c173-a491-44bd-8fcc-26c5640beeb5') center top / contain no-repeat;
+                border-radius: 1.5rem;
+                padding: 2.5rem 0;
+                margin: 0 auto;
+                max-width: 95vw;
+                position: relative;
+            }
+            .about-quote-bg > div {
+                position: relative;
+                z-index: 2;
+                background: rgba(255,255,255,0.85);
+                border-radius: 1.5rem;
+                padding: 1.5rem 0.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .about-quote-bg {
+                background: none !important;
+            }
+        }
+        /* 服務項目彈窗圖片排列優化 */
+        #serviceModalContent {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+        #serviceModalContent .img-container,
+        #serviceModalContent .relative.overflow-hidden {
+            aspect-ratio: 1/1;
+            width: 100%;
+            height: auto;
+            min-width: 0;
+            min-height: 0;
+            background: #f8fafc;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px 0 rgba(62,198,224,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #serviceModalContent img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.8rem;
+            transition: transform 0.2s;
+            cursor: zoom-in;
+        }
+        #serviceModalContent img:hover {
+            transform: scale(1.04);
         }
     </style>
 </head>
@@ -336,8 +388,10 @@
                 </p>
                 <div class="my-8">
                     <hr class="border-gray-200 mb-6">
-                    <div class="text-gray-500 text-sm md:text-base font-light leading-relaxed tracking-wide whitespace-pre-line">
-                        生活裡有花，花裡有生活<br>與花草生活的日日。
+                    <div class="about-quote-bg">
+                        <div class="text-gray-500 text-sm md:text-base font-light leading-relaxed tracking-wide whitespace-pre-line">
+                            生活裡有花，花裡有生活<br>與花草生活的日日。
+                        </div>
                     </div>
                 </div>
             </div>
@@ -400,109 +454,6 @@
     </script>
 
     <script>
-    // 服務圖片資料
-    const serviceImages = {
-        space: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F02FC3B65-D4D3-4D10-91C5-37EB2EC6E6B2.JPEG?alt=media&token=a5e47acc-5402-4fc3-8d01-731a065b37a0',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F1A81B6FF-AC7C-4356-9E7E-D524B3A8B767.JPEG?alt=media&token=4b3e0f10-d39c-4f23-813b-ea5f056acbcc',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F4531E3C0-C868-41BC-A4CC-7D39AF3D9430.JPEG?alt=media&token=28366e62-19c1-4b8a-9187-fe2e16dcd583',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F58235DBC-EA00-4EBF-9FA7-7CD2E2A50F68.JPEG?alt=media&token=24e63321-0f2c-401f-9e7e-d5cca19e272a',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F68503114-29F1-45AC-97EA-281683AF8DC7.JPEG?alt=media&token=3ab85081-3843-438b-b61d-b51d0d64227b',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E7%A9%BA%E9%96%93%E8%8A%B1%E8%97%9D%E8%A8%AD%E8%A8%88%E4%BD%88%E7%BD%AE%E7%85%A7%E7%89%87%2F6A6597D2-761F-4B4B-89BD-9C0F3AF586ED.JPEG?alt=media&token=908a80b1-0d30-41d3-864c-09f1b4a90387'
-        ],
-        wedding: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0358.JPG?alt=media&token=c95a571d-6426-4a6c-99d2-734a5c947457',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0360.JPG?alt=media&token=2f721a39-65e7-49df-9148-6a5c3fcfeec0',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0361.JPG?alt=media&token=8199ccd4-6d6d-4f40-80b9-d2c19249862e',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0362.JPG?alt=media&token=63522b1e-7b52-4abc-9367-09a236e36e1b',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0363.JPG?alt=media&token=3ceda94e-1773-4c76-b816-f869c32caca8',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E5%A9%9A%E7%A6%AE%E8%8A%B1%E8%97%9D%E7%85%A7%E7%89%87%2FIMG_0364.JPG?alt=media&token=48ffd430-4fc5-45ab-8656-db198e2e0445'
-        ],
-        course: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F585C7D32-785C-4195-93F7-5C415148354C.JPEG?alt=media&token=3d343132-0ce9-43f2-ad83-6c9038350fd8',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F6F5D8695-DB8D-4887-9EAE-04F6103F2B93.JPEG?alt=media&token=4f96bf5d-883d-4c5f-aab7-5e188dec5b86',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2F7C4428A0-3EFC-4A9E-B090-FD5FED8292D8.JPEG?alt=media&token=6eca7458-a5e2-4b76-8ee7-308f74d32f92',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FBE0FB05C-BF14-4557-BD1D-57145E38CA4D.JPEG?alt=media&token=0133ee29-5b4f-4de3-a58f-1805b242fc88',
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FCE35EC47-0F7A-469B-B45C-2838B8D79049.JPEG?alt=media&token=5d376bd8-cfa5-44c8-aebd-38c427b15bcb",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FCEE23D95-07A2-4273-9718-BD913F344740.JPEG?alt=media&token=c13e4b06-1a1d-40e9-903d-10e81426b754",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FD5285838-0A22-4EE6-A70D-890C830D5276.JPEG?alt=media&token=b6ac656d-f22e-4304-93f1-53733583a33b",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E8%8A%B1%E8%97%9D%E8%AA%B2%E7%A8%8B%2FE228473D-C9E3-4C46-82EB-63BE69CA4210.JPEG?alt=media&token=a737f565-c455-43be-8951-1ca78c0e717b"
-        ],
-        business: [
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F1F86558F-9A8F-41C6-B1A8-CABFE3595AC2.JPEG?alt=media&token=61dd59f6-0832-4246-9abf-affdcf943c70",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F2090D64A-D70B-47CD-86AF-C31DE1E53815.JPEG?alt=media&token=63f742c1-d7d9-44b1-ab0c-f051d83acb4e",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F82A5A72B-8586-4BF1-964D-1796DB36C07F.JPEG?alt=media&token=cd34141c-47f2-404f-9c83-4c9a7c1b8ecc",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F82AC001E-B3C3-4A1B-B026-093CC4E6794A.JPEG?alt=media&token=3d34ad75-0ebe-4d2a-8f99-2cb6fe543751",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F8A1B82A0-899B-4ABA-89C1-D3824A779794.JPEG?alt=media&token=26d1b455-35b9-4613-b0de-eeb2e2075d3f",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F8C1C61D1-3F07-4B59-B1E6-7EE0EA13CDD7.JPEG?alt=media&token=91eb07e0-d6dc-4996-800d-5953ee2fe816",
-            "https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/%E9%80%B1%E8%8A%B1%E6%9C%8D%E5%8B%99%2F9B07CAE6-6C55-45CC-A829-C26BEACE8218.JPEG?alt=media&token=18107907-89ae-441d-bd9a-62320d22a86e"
-        ],
-        microgarden: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0292.JPG?alt=media&token=dd54fc8c-83c6-41fa-8492-0f8de6956cca',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0293.JPG?alt=media&token=4495a747-d643-455a-8d8b-9faa882417d2',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0294.JPG?alt=media&token=e0ea1407-aa57-49ba-8aa5-8a620c7a91cc',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/microgarden%2FIMG_0295.JPG?alt=media&token=e10d1e5d-a67d-4d59-8d2e-30c0323f2d5d'
-        ],
-        gift: [
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0221.JPG?alt=media&token=6e335ad8-4884-400d-abe0-7839ab01dcc8',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0222.JPG?alt=media&token=d2be005a-9b93-487c-8b5c-674860d060ec',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0223.JPG?alt=media&token=c0db119c-6ec8-4dbf-ad70-04856b45521a',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0224.JPG?alt=media&token=ea88cfb1-fd0d-4c80-9cb6-0eb3591eeb61',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0225.JPG?alt=media&token=2c6ea8ed-2988-4b5d-b81d-fbe0439cd708',
-            'https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/gift%2FIMG_0226.JPG?alt=media&token=d083252c-e600-4e99-b185-c4d291833f56'
-        ]
-    };
-
-    // 顯示服務圖片
-    function showServiceImages(serviceType) {
-        const modal = document.getElementById('serviceModal');
-        const modalContent = document.getElementById('serviceModalContent');
-        const images = serviceImages[serviceType];
-        
-        // 清空現有內容
-        modalContent.innerHTML = '';
-        
-        // 添加圖片
-        images.forEach((imageUrl, idx) => {
-            const imgContainer = document.createElement('div');
-            imgContainer.className = 'relative overflow-hidden w-full h-72';
-            
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.className = 'w-full h-full object-contain';
-            img.alt = '服務圖片';
-            img.style.cursor = 'zoom-in';
-            img.addEventListener('click', function() {
-                openLightbox(images, idx);
-            });
-            
-            imgContainer.appendChild(img);
-            modalContent.appendChild(imgContainer);
-        });
-        
-        // 顯示模態框
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        // 鎖定背景滾動
-        document.body.style.overflow = 'hidden';
-    }
-
-    // 關閉服務模態框
-    function closeServiceModal() {
-        const modal = document.getElementById('serviceModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        // 恢復背景滾動
-        document.body.style.overflow = '';
-    }
-
-    // 點擊模態框外部關閉
-    document.getElementById('serviceModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeServiceModal();
-        }
-    });
-
     // Lightbox 功能
     let currentLightboxImages = [];
     let currentLightboxIndex = 0;

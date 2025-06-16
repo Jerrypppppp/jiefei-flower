@@ -14,6 +14,19 @@ const firebaseConfig = {
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const serviceTypes = [
+  { key: 'space', label: '空間花藝設計佈置' },
+  { key: 'wedding', label: '婚禮花藝設計佈置' },
+  { key: 'business', label: '企業／門市週花服務' },
+  { key: 'gift', label: '花禮' },
+  { key: 'course', label: '花藝課程' },
+  { key: 'microgarden', label: '花圃微景觀設計施作' }
+];
+
+// 儲存分類圖片
+let serviceImagesByType = {};
+serviceTypes.forEach(t => serviceImagesByType[t.key] = []);
+
 async function loadGalleryImages() {
     const galleryGrid = document.getElementById('gallery-grid');
     if (!galleryGrid) return;
@@ -41,8 +54,72 @@ async function loadGalleryImages() {
     });
 }
 
+async function loadServiceImagesFromFirestore() {
+  const q = query(collection(db, 'serviceImages'), orderBy('createdAt', 'desc'));
+  const snapshot = await getDocs(q);
+  // 清空
+  serviceTypes.forEach(t => serviceImagesByType[t.key] = []);
+  snapshot.forEach(doc => {
+    const img = doc.data();
+    if (serviceImagesByType[img.type]) {
+      serviceImagesByType[img.type].push(img.url);
+    }
+  });
+}
+
+// 綁定服務卡片點擊事件
+function bindServiceCardClicks() {
+  serviceTypes.forEach(type => {
+    const card = document.querySelector(`.service-card[data-service="${type.key}"]`);
+    if (card) {
+      card.onclick = () => showServiceImages(type.key);
+    }
+  });
+}
+
+// 顯示服務圖片（動態）
+function showServiceImages(serviceType) {
+  const modal = document.getElementById('serviceModal');
+  const modalContent = document.getElementById('serviceModalContent');
+  const images = serviceImagesByType[serviceType] || [];
+  // 清空現有內容
+  modalContent.innerHTML = '';
+  // 添加圖片
+  images.forEach((imageUrl, idx) => {
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'relative overflow-hidden w-full h-72';
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.className = 'w-full h-full object-contain';
+    img.alt = '服務圖片';
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function() {
+      openLightbox(images, idx);
+    });
+    imgContainer.appendChild(img);
+    modalContent.appendChild(imgContainer);
+  });
+  // 顯示模態框
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+  // 重新綁定叉叉
+  const closeBtn = document.getElementById('closeServiceModal');
+  if (closeBtn) closeBtn.onclick = closeServiceModal;
+}
+
+// 初始化服務項目圖片功能
+async function initServiceImages() {
+  await loadServiceImagesFromFirestore();
+  bindServiceCardClicks();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadGalleryImages();
+    initServiceImages();
+    // 修正服務項目 modal 叉叉無法關閉問題
+    const closeBtn = document.getElementById('closeServiceModal');
+    if (closeBtn) closeBtn.onclick = closeServiceModal;
 });
 
 const bookingForm = document.getElementById('bookingForm');
