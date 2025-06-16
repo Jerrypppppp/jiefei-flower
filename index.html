@@ -87,6 +87,84 @@
             max-width: 38em;
             margin: 0 auto;
         }
+        @media (min-width: 768px) {
+            #services {
+                background: url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%89%8B%E7%95%AB%E5%B0%81%E9%9D%A2.JPG?alt=media&token=4946c173-a491-44bd-8fcc-26c5640beeb5') center center / cover no-repeat, #f9fafb;
+                position: relative;
+            }
+            #services::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.85);
+                z-index: 1;
+            }
+            #services > .container {
+                position: relative;
+                z-index: 2;
+            }
+            /* 新增：關於我們背景 */
+            #about {
+                background: url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%89%8B%E7%95%AB%E5%B0%81%E9%9D%A2.JPG?alt=media&token=4946c173-a491-44bd-8fcc-26c5640beeb5') center center / cover no-repeat;
+                position: relative;
+            }
+            #about::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255,255,255,0.85);
+                z-index: 1;
+            }
+            #about > .container {
+                position: relative;
+                z-index: 2;
+            }
+        }
+        @media (max-width: 767px) {
+            #services {
+                background: url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%89%8B%E7%95%AB%E5%B0%81%E9%9D%A2.JPG?alt=media&token=4946c173-a491-44bd-8fcc-26c5640beeb5') center top / 100% auto no-repeat, #f9fafb;
+                position: relative;
+            }
+            #services::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.9);
+                z-index: 1;
+            }
+            #services > .container {
+                position: relative;
+                z-index: 2;
+            }
+            /* 新增：關於我們背景 */
+            #about {
+                background: url('https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%89%8B%E7%95%AB%E5%B0%81%E9%9D%A2.JPG?alt=media&token=4946c173-a491-44bd-8fcc-26c5640beeb5') center top / 100% auto no-repeat;
+                position: relative;
+            }
+            #about::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255,255,255,0.92);
+                z-index: 1;
+            }
+            #about > .container {
+                position: relative;
+                z-index: 2;
+            }
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -135,7 +213,7 @@
     <!-- Gallery 作品集區塊 -->
     <section id="gallery" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">最新消息</h2>
+            <h2 class="text-4xl font-bold text-center mb-12">最新消息 & 作品 </h2>
             <div class="flex overflow-x-auto space-x-4 md:grid md:grid-cols-2 lg:grid-cols-3 md:space-x-0 gap-6" id="gallery-grid" style="scroll-snap-type: x mandatory;">
                 <!-- 圖片將由 JavaScript 動態載入 -->
             </div>
@@ -143,62 +221,62 @@
     </section>
 
     <!-- Services 服務項目區塊 -->
-    <section id="services" class="py-20 bg-gray-50">
+    <section id="services" class="py-20 bg-gray-50" style="background: #f9fafb;">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12">服務項目</h2>
             <div class="flex overflow-x-auto space-x-4 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
                 <!-- 1. 空間花藝設計佈置 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="space" onclick="showServiceImages('space')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="space" onclick="showServiceImages('space')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-seedling text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">空間花藝設計佈置</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">空間花藝設計佈置</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
                 <!-- 2. 婚禮花藝設計佈置 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="wedding" onclick="showServiceImages('wedding')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="wedding" onclick="showServiceImages('wedding')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-ring text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">婚禮花藝設計佈置</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">婚禮花藝設計佈置</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
                 <!-- 3. 企業／門市週花服務 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="business" onclick="showServiceImages('business')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="business" onclick="showServiceImages('business')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-briefcase text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">企業／門市週花服務</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">企業／門市週花服務</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
                 <!-- 4. 花禮 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="gift" onclick="showServiceImages('gift')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="gift" onclick="showServiceImages('gift')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-gift text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">花禮</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">花禮</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
                 <!-- 5. 花藝課程 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="course" onclick="showServiceImages('course')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="course" onclick="showServiceImages('course')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-chalkboard-teacher text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">花藝課程</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">花藝課程</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
                 <!-- 6. 花圃微景觀設計施作 -->
-                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center" data-service="microgarden" onclick="showServiceImages('microgarden')">
-                    <div class="icon-bg">
+                <div class="service-card p-8 text-center min-w-[260px] flex flex-col items-center bg-white/90 border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200" data-service="microgarden" onclick="showServiceImages('microgarden')">
+                    <div class="icon-bg mb-4">
                         <i class="fas fa-leaf text-white text-3xl"></i>
                     </div>
-                    <h3 class="service-title">花圃微景觀設計施作</h3>
-                    <p class="service-tip"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
+                    <h3 class="service-title mb-2">花圃微景觀設計施作</h3>
+                    <p class="service-tip mb-2"><i class="fas fa-image mr-1"></i>點擊查看作品照片</p>
                     <div class="dot"></div>
                 </div>
             </div>
