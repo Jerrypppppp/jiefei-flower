@@ -214,6 +214,12 @@
             aspect-ratio: 1;
             border-radius: 0.5rem;
         }
+        /* 當彈窗開啟時鎖定背景滾動 */
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -333,7 +339,7 @@
         <!-- Modal 彈窗 -->
         <div id="serviceModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
             <div class="bg-white rounded-lg p-4 md:p-8 max-w-6xl w-full mx-4 relative">
-                <button id="closeServiceModal" class="absolute top-4 right-4 text-gray-500 hover:text-primary text-2xl" onclick="closeServiceModal()">&times;</button>
+                <button id="closeServiceModal" class="absolute -top-12 right-2 md:top-4 md:right-4 text-white md:text-gray-500 hover:text-primary text-3xl md:text-2xl z-50" onclick="closeServiceModal()">&times;</button>
                 <div id="serviceModalContent" class="flex flex-nowrap md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 overflow-x-auto md:overflow-y-auto max-h-[80vh] p-2 md:p-4 snap-x snap-mandatory">
                     <!-- 圖片將由 JavaScript 動態載入 -->
                 </div>
@@ -620,6 +626,41 @@
     }
 
     console.log('當前登入用戶:', auth.currentUser.email);
+    </script>
+
+    <script>
+        // 當開啟彈窗時鎖定背景
+        function showServiceImages(type) {
+            document.body.classList.add('modal-open');
+            // ... 其他現有的彈窗開啟邏輯 ...
+            const modal = document.getElementById('serviceModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // 載入對應服務類型的圖片
+            const modalContent = document.getElementById('serviceModalContent');
+            modalContent.innerHTML = ''; // 清空現有內容
+            
+            // 從 serviceImagesByType 中獲取對應類型的圖片
+            const images = serviceImagesByType[type] || [];
+            images.forEach((imageUrl, index) => {
+                const imgContainer = document.createElement('div');
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `${getServiceLabel(type)} 圖片 ${index + 1}`;
+                img.onclick = () => openLightbox(images, index);
+                imgContainer.appendChild(img);
+                modalContent.appendChild(imgContainer);
+            });
+        }
+
+        // 關閉彈窗時解除背景鎖定
+        function closeServiceModal() {
+            document.body.classList.remove('modal-open');
+            const modal = document.getElementById('serviceModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
     </script>
 </body>
 </html> 
