@@ -606,12 +606,22 @@
             // 修改按鈕點擊事件，登入後點擊跳轉到後台
             loginBtn.onclick = () => window.location.href = 'admin.html';
             mobileLoginBtn.onclick = () => window.location.href = 'admin.html';
+            
+            // 檢查是否為首次登入（避免 GitHub Pages 上的自動跳轉）
+            const isFirstLogin = sessionStorage.getItem('isFirstLogin');
+            if (!isFirstLogin) {
+                sessionStorage.setItem('isFirstLogin', 'true');
+                // 只在首次登入時顯示提示，不自動跳轉
+                console.log('管理員已登入，可以點擊「回後台」進入管理頁面');
+            }
         } else {
             // 未登入時恢復原狀
             loginBtn.textContent = '管理員登錄';
             mobileLoginBtn.textContent = '管理員登錄';
             loginBtn.onclick = showLoginModal;
             mobileLoginBtn.onclick = showLoginModal;
+            // 清除登入狀態
+            sessionStorage.removeItem('isFirstLogin');
         }
     });
     </script>
