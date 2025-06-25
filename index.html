@@ -212,7 +212,7 @@
         #serviceModalContent img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             aspect-ratio: 1;
             border-radius: 0.5rem;
         }
@@ -239,7 +239,7 @@
                 <a href="#services" class="text-gray-600 hover:text-primary">服務項目</a>
                 <a href="#about" class="text-gray-600 hover:text-primary">關於我們</a>
                 <a href="#contact" class="text-gray-600 hover:text-primary">聯絡我們</a>
-                <button id="loginBtn" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 ml-4">登入</button>
+                <button id="loginBtn" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 ml-4">管理員登錄</button>
             </div>
             <button id="mobileMenuBtn" class="md:hidden text-gray-600">
                 <i class="fas fa-bars text-2xl"></i>
@@ -252,7 +252,7 @@
             <a href="#services" class="block py-2 text-gray-600 hover:text-primary">服務項目</a>
             <a href="#about" class="block py-2 text-gray-600 hover:text-primary">關於我們</a>
             <a href="#contact" class="block py-2 text-gray-600 hover:text-primary">聯絡我們</a>
-            <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">登入</button>
+            <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">管理員登錄</button>
         </div>
     </nav>
 
@@ -357,46 +357,45 @@
     </section>
 
     <!-- About 品牌故事／關於我們區塊 -->
-    <section id="about" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">關於我們</h2>
-            <div class="max-w-2xl mx-auto text-center space-y-6">
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
-                    「捷菲花藝」誕生於最艱難的 Covid 疫情時期。<br>
-                    當時 J 小姐還在唸碩二，服務於管理顧問公司擔任客座講師，<br>
-                    無奈疫情打亂了所有的人生節奏 🎵
-                </p>
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
-                    <span class="font-semibold">V 先生</span>深知 J 小姐心中一直有一座花園，對花藝充滿渴望與憧憬。<br>
-                    在 V 先生的鼓勵下，「捷菲花藝」就這樣誕生了。<br>
-                    之後也陸續拿到了國際荷蘭花藝師證照 <span class="font-semibold">DFA & ADFA</span>。<br>
-                    捷菲的 J 與 F 之間，有個很重要的 <span class="font-semibold">V</span>，<br>
-                    正是 V 先生促成了 J 小姐與 Floral 的相遇。
-                </p>
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
-                    這條花藝之路，我們走得戰戰兢兢、亦步亦趨。<br>
-                    每一張訂單、每一堂花藝課程，背後都是無數的思考設計、<br>
-                    擔心花材的萬一、流汗的搬運、堆成草山的除葉，<br>
-                    以及載運時的小心翼翼……
-                </p>
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700 font-medium italic">
-                    最大的願望，就是看見交付到客人手上時，<br>
-                    臉上的那抹「微笑」、那份「開心」、那一句「喜歡」。<br>
-                    好像再難也不難了吧！
-                </p>
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
-                    這條路的終點還很遠，我們會用熱情繼續前進，<br>
-                    更希望這條路上有您的參與。
-                </p>
-                <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
-                    希望您也喜歡我們的小故事，喜歡捷菲的風格。
-                </p>
-                <div class="my-8">
-                    <hr class="border-gray-200 mb-6">
-                    <div class="about-quote-bg">
-                        <div class="text-gray-500 text-sm md:text-base font-light leading-relaxed tracking-wide whitespace-pre-line">
-                            生活裡有花，花裡有生活<br>與花草生活的日日。
-                        </div>
+    <section id="about" class="py-20 relative">
+        <div class="absolute inset-0 bg-white/90 md:bg-white/70 z-0"></div>
+        <h2 class="text-4xl font-bold text-center mb-12 relative z-10">關於我們</h2>
+        <div class="max-w-2xl mx-auto text-center space-y-6 relative z-10 px-4">
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                「捷菲花藝」誕生於最艱難的 Covid 疫情時期。
+                當時 J 小姐還在唸碩二，服務於管理顧問公司擔任客座講師，
+                無奈疫情打亂了所有的人生節奏 🎵
+            </p>
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                V 先生深知 J 小姐心中一直有一座花園，對花藝充滿渴望與憧憬。
+                在 V 先生的鼓勵下，「捷菲花藝」就這樣誕生了。
+                之後也陸續拿到了國際荷蘭花藝師證照 <span class="font-semibold">DFA & ADFA</span>。
+                捷菲的 J 與 F 之間，有個很重要的 V，
+                正是 V 先生促成了 J 小姐與 Floral 的相遇。
+            </p>
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                這條花藝之路，我們走得戰戰兢兢、亦步亦趨。
+                每一張訂單、每一堂花藝課程，背後都是無數的思考設計、
+                擔心花材的萬一、流汗的搬運、堆成草山的除葉，
+                以及載運時的小心翼翼……
+            </p>
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700 font-medium italic">
+                最大的願望，就是看見交付到客人手上時，
+                臉上的那抹「微笑」、那份「開心」、那一句「喜歡」。
+                好像再難也不難了吧！
+            </p>
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                這條路的終點還很遠，我們會用熱情繼續前進，<br>
+                更希望這條路上有您的參與。
+            </p>
+            <p class="text-base md:text-[17px] leading-relaxed text-gray-700">
+                希望您也喜歡我們的小故事，喜歡捷菲的風格。
+            </p>
+            <div class="my-8">
+                <hr class="border-gray-200 mb-6">
+                <div class="about-quote-bg">
+                    <div class="text-gray-500 text-sm md:text-base font-light leading-relaxed tracking-wide whitespace-pre-line">
+                        生活裡有花，花裡有生活<br>與花草生活的日日。
                     </div>
                 </div>
             </div>
@@ -412,7 +411,7 @@
                     <img src="https://firebasestorage.googleapis.com/v0/b/jiefei-flower.firebasestorage.app/o/logo%2F%E6%96%B0logo.JPG?alt=media&token=0913f62f-e995-484e-849c-7d063237ba4e" alt="捷菲花藝 JVF Logo" class="w-32 h-32 object-contain rounded-lg">
                     <div class="flex flex-col items-center text-gray-700 text-base font-medium space-y-2 w-full">
                         <div><span class="font-bold">工作室地址：</span>臺中市大里區中興路一段159-1號 4F</div>
-                        <div><span class="font-bold">聯絡電話：</span>04-2496-3299-1402</div>
+                        <div><span class="font-bold">聯絡電話：</span>04-2496-3299-1402 （預約制）</div>
                         <div><span class="font-bold">Email：</span><a href="mailto:0601care@gmail.com" class="text-primary underline">0601care@gmail.com</a></div>
                     </div>
                 </div>
@@ -507,18 +506,28 @@
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">登入選項</h2>
+                <h2 class="text-2xl font-bold">管理員登錄</h2>
                 <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="space-y-4">
-                <button id="googleLoginBtn" class="block w-full bg-blue-500 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-600">
-                    <i class="fab fa-google mr-2"></i>使用 Google 帳號登入
-                </button>
-                <a href="admin.html" class="block w-full bg-gray-500 text-white text-center px-6 py-3 rounded-lg hover:bg-gray-600">
-                    <i class="fas fa-user-shield mr-2"></i>管理員登入
-                </a>
+                <form id="adminLoginForm" class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">電子郵件</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">密碼</label>
+                        <input type="password" id="password" name="password" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        登錄
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -526,7 +535,7 @@
     <script type="module" src="script.js?v=20240712"></script>
     <script type="module">
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -546,7 +555,6 @@
     const loginModal = document.getElementById('loginModal');
     const loginBtn = document.getElementById('loginBtn');
     const mobileLoginBtn = document.getElementById('mobileLoginBtn');
-    const googleLoginBtn = document.getElementById('googleLoginBtn');
     const closeLoginModal = document.getElementById('closeLoginModal');
 
     function showLoginModal() {
@@ -566,68 +574,13 @@
         }
     });
 
-    // WebView/內建瀏覽器偵測
-    function isInWebView() {
-        const ua = navigator.userAgent || navigator.vendor || window.opera;
-        if (/FBAN|FBAV|Instagram|Line|WebView|wv|; wv\)/i.test(ua)) return true;
-        if ((/iPhone|iPod|iPad/i.test(ua)) && !/Safari/i.test(ua)) return true;
-        if (/Android/.test(ua) && /Version\/\d+/.test(ua) && !/Chrome\//.test(ua)) return true;
-        return false;
-    }
-
-    // Google 登入
-    googleLoginBtn.addEventListener('click', () => {
-        if (isInWebView()) {
-            alert('App 內建瀏覽器無法使用 Google 登入，但您仍可瀏覽網站內容。如需登入，請用 Chrome/Safari 等標準瀏覽器開啟本網站。');
-            return;
-        }
-        const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                hideLoginModal();
-                updateLoginUI(result.user);
-            })
-            .catch((error) => {
-                alert('登入失敗：' + error.message);
-            });
-    });
-
-    // 登出功能
-    function handleLogout() {
-        signOut(auth)
-            .then(() => {
-                updateLoginUI(null);
-            })
-            .catch((error) => {
-                alert('登出失敗：' + error.message);
-            });
-    }
-
     // 監聽登入狀態
     onAuthStateChanged(auth, (user) => {
-        updateLoginUI(user);
+        // 這裡可根據 user 狀態更新 UI
         if (user) {
             hideLoginModal(); // 登入後自動關閉 Modal
         }
     });
-
-    // 更新登入按鈕 UI
-    function updateLoginUI(user) {
-        if (user) {
-            loginBtn.textContent = user.displayName + '（登出）';
-            mobileLoginBtn.textContent = user.displayName + '（登出）';
-            loginBtn.onclick = handleLogout;
-            mobileLoginBtn.onclick = handleLogout;
-        } else {
-            loginBtn.textContent = '登入';
-            mobileLoginBtn.textContent = '登入';
-            loginBtn.onclick = showLoginModal;
-            mobileLoginBtn.onclick = showLoginModal;
-        }
-    }
-
-    console.log('當前登入用戶:', auth.currentUser.email);
     </script>
 
     <script>

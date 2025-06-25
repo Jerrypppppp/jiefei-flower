@@ -134,22 +134,22 @@ addImageForm.addEventListener('submit', async (e) => {
             },
             async () => {
                 try {
-                    const url = await getDownloadURL(imgRef);
-                    if (!url.includes('firebasestorage.app')) {
-                        throw new Error('取得圖片下載連結失敗，請稍後再試。');
-                    }
-                    await addDoc(collection(db, 'images'), {
-                        url,
-                        title,
-                        storagePath: filePath,
-                        active: true,
+        const url = await getDownloadURL(imgRef);
+        if (!url.includes('firebasestorage.app')) {
+            throw new Error('取得圖片下載連結失敗，請稍後再試。');
+        }
+        await addDoc(collection(db, 'images'), {
+            url,
+            title,
+            storagePath: filePath,
+            active: true,
                         createdAt: serverTimestamp(),
                         uploadedBy: auth.currentUser.uid
-                    });
-                    addImageForm.reset();
-                    loadImages();
-                    alert('圖片已上傳，前台作品集將自動顯示。');
-                } catch (error) {
+        });
+        addImageForm.reset();
+        loadImages();
+        alert('圖片已上傳，前台作品集將自動顯示。');
+    } catch (error) {
                     console.error('保存記錄錯誤:', error);
                     alert('新增圖片失敗：' + (error.message || error));
                 } finally {
@@ -292,13 +292,13 @@ if (addServiceImageForm) {
             },
             async () => {
               try {
-                const url = await getDownloadURL(imgRef);
-                await addDoc(collection(db, 'serviceImages'), {
-                  url,
-                  type,
-                  storagePath: filePath,
-                  createdAt: serverTimestamp()
-                });
+        const url = await getDownloadURL(imgRef);
+        await addDoc(collection(db, 'serviceImages'), {
+          url,
+          type,
+          storagePath: filePath,
+          createdAt: serverTimestamp()
+        });
                 completedFiles++;
                 resolve();
               } catch (error) {
