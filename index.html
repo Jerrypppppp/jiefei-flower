@@ -586,8 +586,10 @@
             submitBtn.disabled = true;
             submitBtn.textContent = '登錄中...';
             await signInWithEmailAndPassword(auth, email, password);
-            // 登入成功後跳轉到後台
-            window.location.href = 'admin.html';
+            // 登入成功後不自動跳轉，讓管理員選擇
+            submitBtn.disabled = false;
+            submitBtn.textContent = '登錄';
+            console.log('登入成功！可以點擊「回後台」進入管理頁面');
         } catch (error) {
             alert('登入失敗：' + error.message);
             submitBtn.disabled = false;
@@ -597,6 +599,8 @@
 
     // 監聽登入狀態
     onAuthStateChanged(auth, (user) => {
+        console.log('登入狀態變更:', user ? user.email : '未登入');
+        
         if (user) {
             hideLoginModal(); // 登入後自動關閉 Modal
             // 更新按鈕文字，讓管理員知道已登入
@@ -607,12 +611,13 @@
             loginBtn.onclick = () => window.location.href = 'admin.html';
             mobileLoginBtn.onclick = () => window.location.href = 'admin.html';
             
-            // 檢查是否為首次登入（避免 GitHub Pages 上的自動跳轉）
-            const isFirstLogin = sessionStorage.getItem('isFirstLogin');
-            if (!isFirstLogin) {
-                sessionStorage.setItem('isFirstLogin', 'true');
-                // 只在首次登入時顯示提示，不自動跳轉
-                console.log('管理員已登入，可以點擊「回後台」進入管理頁面');
+            console.log('管理員已登入，可以點擊「回後台」進入管理頁面');
+            
+            // 檢查是否為從後台跳轉過來的預覽
+            const isPreviewMode = sessionStorage.getItem('previewMode');
+            if (isPreviewMode) {
+                console.log('預覽模式：管理員可以正常瀏覽前台');
+                sessionStorage.removeItem('previewMode'); // 清除預覽模式標記
             }
         } else {
             // 未登入時恢復原狀
@@ -620,8 +625,6 @@
             mobileLoginBtn.textContent = '管理員登錄';
             loginBtn.onclick = showLoginModal;
             mobileLoginBtn.onclick = showLoginModal;
-            // 清除登入狀態
-            sessionStorage.removeItem('isFirstLogin');
         }
     });
     </script>

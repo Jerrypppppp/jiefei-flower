@@ -75,6 +75,17 @@ logoutBtn.addEventListener('click', () => {
     signOut(auth);
 });
 
+// 預覽前台
+const previewFrontendBtn = document.getElementById('previewFrontendBtn');
+if (previewFrontendBtn) {
+    previewFrontendBtn.addEventListener('click', () => {
+        // 設定預覽模式標記
+        sessionStorage.setItem('previewMode', 'true');
+        // 在新分頁開啟前台
+        window.open('index.html', '_blank');
+    });
+}
+
 // 新增圖片
 addImageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
