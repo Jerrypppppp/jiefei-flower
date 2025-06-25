@@ -535,7 +535,7 @@
     <script type="module" src="script.js?v=20240712"></script>
     <script type="module">
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDY5m6pnu4bqaQUsmr27j4SIkWIfsawfPk",
@@ -556,6 +556,7 @@
     const loginBtn = document.getElementById('loginBtn');
     const mobileLoginBtn = document.getElementById('mobileLoginBtn');
     const closeLoginModal = document.getElementById('closeLoginModal');
+    const adminLoginForm = document.getElementById('adminLoginForm');
 
     function showLoginModal() {
         loginModal.classList.remove('hidden');
@@ -574,11 +575,34 @@
         }
     });
 
+    // 管理員登入表單處理
+    adminLoginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const submitBtn = adminLoginForm.querySelector('button[type="submit"]');
+        
+        try {
+            submitBtn.disabled = true;
+            submitBtn.textContent = '登錄中...';
+            await signInWithEmailAndPassword(auth, email, password);
+            // 登入成功後跳轉到後台
+            window.location.href = 'admin.html';
+        } catch (error) {
+            alert('登入失敗：' + error.message);
+            submitBtn.disabled = false;
+            submitBtn.textContent = '登錄';
+        }
+    });
+
     // 監聽登入狀態
     onAuthStateChanged(auth, (user) => {
-        // 這裡可根據 user 狀態更新 UI
         if (user) {
             hideLoginModal(); // 登入後自動關閉 Modal
+            // 如果已經登入，直接跳轉到後台
+            if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+                window.location.href = 'admin.html';
+            }
         }
     });
     </script>
