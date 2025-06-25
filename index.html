@@ -599,10 +599,19 @@
     onAuthStateChanged(auth, (user) => {
         if (user) {
             hideLoginModal(); // 登入後自動關閉 Modal
-            // 如果已經登入，直接跳轉到後台
-            if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
-                window.location.href = 'admin.html';
-            }
+            // 更新按鈕文字，讓管理員知道已登入
+            loginBtn.textContent = '回後台';
+            mobileLoginBtn.textContent = '回後台';
+            
+            // 修改按鈕點擊事件，登入後點擊跳轉到後台
+            loginBtn.onclick = () => window.location.href = 'admin.html';
+            mobileLoginBtn.onclick = () => window.location.href = 'admin.html';
+        } else {
+            // 未登入時恢復原狀
+            loginBtn.textContent = '管理員登錄';
+            mobileLoginBtn.textContent = '管理員登錄';
+            loginBtn.onclick = showLoginModal;
+            mobileLoginBtn.onclick = showLoginModal;
         }
     });
     </script>
