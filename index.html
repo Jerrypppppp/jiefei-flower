@@ -263,7 +263,14 @@
         <div class="text-center text-white z-10 px-6 md:px-8 lg:px-12">
             <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-title">花藝空間美學</h1>
             <p class="hero-subtitle mb-6">用心打造每一份專屬花藝</p>
-            <p class="hero-story">捷菲 JVF 這個品牌名字呢～是從 J 小姐與 V 先生 Jennifer&Vincent Floral 所發想出來，捷菲希望能將花草回歸至生活陪伴，生活裡有花，花裡有生活，與花草生活的日日。</p>
+            <p class="hero-story">
+              捷菲 JVF 這個品牌名字呢～是從<br>
+              J 小姐與 V 先生<br>
+              Jennifer&Vincent Floral 所發想出來<br>
+              捷菲希望能將花草回歸至生活陪伴<br>
+              生活裡有花，花裡有生活<br>
+              與花草生活的日日
+            </p>
         </div>
     </section>
 
@@ -350,8 +357,6 @@
         <!-- Lightbox 圖片預覽 -->
         <div id="lightboxModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100]">
             <button id="closeLightbox" class="absolute top-6 right-8 text-white text-3xl z-20 hover:text-gray-300">&times;</button>
-            <button id="prevLightbox" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl z-20 hover:text-gray-300">&#8592;</button>
-            <button id="nextLightbox" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl z-20 hover:text-gray-300">&#8594;</button>
             <img id="lightboxImg" src="" alt="預覽圖片" class="max-w-[90%] max-h-[85vh] rounded-lg shadow-2xl z-10 object-contain">
         </div>
     </section>
@@ -360,7 +365,7 @@
     <section id="about" class="py-20 relative">
         <div class="absolute inset-0 bg-white/90 md:bg-white/70 z-0"></div>
         <h2 class="text-4xl font-bold text-center mb-12 relative z-10">關於我們</h2>
-        <div class="max-w-2xl mx-auto text-center space-y-8 md:space-y-6 relative z-10 px-4 md:px-6">
+        <div class="max-w-2xl mx-auto text-center space-y-5 md:space-y-6 relative z-10 px-4 md:px-6">
             <p class="text-base md:text-[17px] leading-7 md:leading-relaxed text-gray-700 text-left md:text-center">
                 捷菲花藝誕生於最艱難的 Covid 疫情時期。
                 當時 J 小姐還在唸碩二，服務於管理顧問公司擔任客座講師，
@@ -480,25 +485,9 @@
         document.body.style.overflow = '';
     }
 
-    function showLightboxImg(idx) {
-        const lightboxImg = document.getElementById('lightboxImg');
-        if (idx < 0) idx = currentLightboxImages.length - 1;
-        if (idx >= currentLightboxImages.length) idx = 0;
-        currentLightboxIndex = idx;
-        lightboxImg.src = currentLightboxImages[idx];
-    }
-
     document.getElementById('closeLightbox').onclick = closeLightbox;
     document.getElementById('lightboxModal').onclick = function(e) {
         if (e.target === this) closeLightbox();
-    };
-    document.getElementById('prevLightbox').onclick = function(e) {
-        e.stopPropagation();
-        showLightboxImg(currentLightboxIndex - 1);
-    };
-    document.getElementById('nextLightbox').onclick = function(e) {
-        e.stopPropagation();
-        showLightboxImg(currentLightboxIndex + 1);
     };
     </script>
 

@@ -36,11 +36,11 @@ async function loadGalleryImages() {
     snapshot.forEach(doc => {
         const image = doc.data();
         const imageElement = document.createElement('div');
-        imageElement.className = 'relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-72 md:w-auto';
+        imageElement.className = 'relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-64 md:w-80 bg-white';
         imageElement.style.scrollSnapAlign = 'start';
         imageElement.innerHTML = `
-            <img src="${image.url}" alt="${image.title}" class="w-full h-64 object-cover cursor-zoom-in rounded-t-lg" data-lightbox="gallery">
-            <div class="bg-white text-center py-2 px-2 rounded-b-lg border-t border-gray-100">
+            <img src="${image.url}" alt="${image.title}" class="w-full aspect-square object-contain bg-gray-50 rounded-t-lg" data-lightbox="gallery">
+            <div class="bg-white text-center py-2 px-2 rounded-b-lg border-t border-gray-100 w-full">
                 <span class="block text-base font-semibold text-gray-700 tracking-wide truncate">${image.title || ''}</span>
             </div>
         `;
