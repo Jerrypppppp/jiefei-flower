@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#253251',
+                        primary: '#ff6b6b',
                         secondary: '#4a4a4a',
                     }
                 }
@@ -34,7 +34,7 @@
             transform: translateY(-10px) scale(1.04);
         }
         .service-card .icon-bg {
-            background: #253251;
+            background: linear-gradient(135deg, #6db3a0 0%, #3ec6e0 100%);
             border-radius: 9999px;
             width: 64px;
             height: 64px;
@@ -52,18 +52,18 @@
             font-size: 1.18rem;
             font-weight: 700;
             letter-spacing: 0.04em;
-            color: #253251;
+            color: #217a8a;
             margin-bottom: 0.5rem;
         }
         .service-card .service-tip {
-            color: #253251;
+            color: #3ec6e0;
             font-size: 0.98rem;
             margin-top: 0.5rem;
             font-weight: 500;
             letter-spacing: 0.01em;
         }
         .service-card .dot {
-            width: 8px; height: 8px; background: #253251; border-radius: 50%; margin: 1rem auto 0 auto;
+            width: 8px; height: 8px; background: #3ec6e0; border-radius: 50%; margin: 1rem auto 0 auto;
         }
         .hero-title {
             font-family: 'Noto Sans TC', 'Montserrat', 'Arial', sans-serif;
@@ -222,9 +222,13 @@
             position: fixed;
             width: 100%;
         }
+        #playMusicBtn:hover {
+            background: #35446a;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
+<audio id="bgm" src="music/人生的旋轉木馬.mp3" loop></audio>
     <!-- Navbar 導覽列 -->
     <nav class="bg-white shadow-md fixed w-full top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -255,6 +259,10 @@
             <button id="mobileLoginBtn" class="w-full mt-2 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90">管理員登錄</button>
         </div>
     </nav>
+
+    <button id="playMusicBtn" style="position:fixed;bottom:32px;right:32px;z-index:9999;width:56px;height:56px;background:#253251;color:#fff;border:none;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:2rem;transition:background 0.2s;">
+        <span style="pointer-events:none;">&#127925;</span>
+    </button>
 
     <!-- Hero Banner 首頁大圖＋品牌標語 -->
     <section id="home" class="relative h-screen flex items-center justify-center">
@@ -651,6 +659,21 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
+    </script>
+
+    <script>
+        const bgm = document.getElementById('bgm');
+        const playBtn = document.getElementById('playMusicBtn');
+        function tryPlay() {
+            bgm.play();
+            playBtn.style.display = 'none';
+            document.body.removeEventListener('click', tryPlay);
+            document.body.removeEventListener('touchstart', tryPlay);
+            document.body.removeEventListener('scroll', tryPlay);
+        }
+        document.body.addEventListener('click', tryPlay);
+        document.body.addEventListener('touchstart', tryPlay);
+        document.body.addEventListener('scroll', tryPlay);
     </script>
 </body>
 </html> 
